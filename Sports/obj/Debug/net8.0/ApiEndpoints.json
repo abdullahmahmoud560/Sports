@@ -48,6 +48,38 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Sports.Controllers.ActionController",
+    "Method": "ApprovePlayer",
+    "RelativePath": "api/approve-Player/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Sports.Controllers.ActionController",
+    "Method": "ApproveAcademy",
+    "RelativePath": "api/Approve/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Sports.Controllers.RegisterController",
     "Method": "CountAcademy",
     "RelativePath": "api/Count-Academy",
@@ -103,6 +135,22 @@
     "ContainingType": "Sports.Controllers.PlayerController",
     "Method": "DeletePlayer",
     "RelativePath": "api/Delete-Player/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Sports.Controllers.RoleController",
+    "Method": "DeleteRole",
+    "RelativePath": "api/Delete-Role/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -214,6 +262,32 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Sports.Controllers.RoleController",
+    "Method": "GetRole",
+    "RelativePath": "api/Get-Role/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Sports.Controllers.RoleController",
+    "Method": "GetRoles",
+    "RelativePath": "api/Get-Roles",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Sports.Controllers.LoginController",
     "Method": "LoginAcademy",
     "RelativePath": "api/Login-Academy",
@@ -248,8 +322,125 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "registerDTO",
-        "Type": "Sports.DTO.RegisterDTO",
+        "Name": "AcademyName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "AcademyCountry",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "AcademyEmail",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "AcademyPhone",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "LogoURL",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "AdditionalPhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "AdditionalEmail",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Under12",
+        "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Under14",
+        "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Under16",
+        "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "TShirtColor",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ShortColor",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ShoesColor",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "AdditionalTShirtColor",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "AdditionalShortColor",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "AdditionalShoesColor",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Password",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ConfirmPassword",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Sports.Controllers.ActionController",
+    "Method": "RejectPlayer",
+    "RelativePath": "api/reject-Player/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Sports.Controllers.ActionController",
+    "Method": "RejectAcademy",
+    "RelativePath": "api/Reject/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
@@ -313,6 +504,27 @@
       {
         "Name": "playerDTO",
         "Type": "Sports.DTO.PlayerDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Sports.Controllers.RoleController",
+    "Method": "UpdateRole",
+    "RelativePath": "api/Update-Role/{id}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "roleDTO",
+        "Type": "Sports.DTO.RoleDTO",
         "IsRequired": true
       }
     ],

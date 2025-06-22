@@ -146,3 +146,9 @@ D:\Sports\Sports\obj\Release\net8.0\refint\Sports.dll
 D:\Sports\Sports\obj\Release\net8.0\Sports.pdb
 D:\Sports\Sports\obj\Release\net8.0\Sports.genruntimeconfig.cache
 D:\Sports\Sports\obj\Release\net8.0\ref\Sports.dll
+D:\Sports\Sports\obj\Release\net8.0\Sports.sourcelink.json
+D:\Sports\Sports\bin\Release\net8.0\Sports.staticwebassets.runtime.json
+D:\Sports\Sports\bin\Release\net8.0\MailKit.dll
+D:\Sports\Sports\bin\Release\net8.0\MimeKit.dll
+D:\Sports\Sports\bin\Release\net8.0\System.Security.Cryptography.Pkcs.dll
+D:\Sports\Sports\bin\Release\net8.0\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll

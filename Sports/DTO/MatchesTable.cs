@@ -7,8 +7,8 @@ namespace Sports.DTO
             public int Id { get; set; }
             public int HomeAcademyId { get; set; }
             public int AwayAcademyId { get; set; }
-            public int HomeGoals { get; set; }
-            public int AwayGoals { get; set; }
+            public string? HomeGoals { get; set; }
+            public string? AwayGoals { get; set; }
             public Academy? HomeAcademy { get; set; }
             public Academy? AwayAcademy { get; set; }
     }

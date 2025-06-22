@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Sports.DTO;
 using Sports.Model;
 
@@ -24,20 +25,25 @@ namespace Sports.Controllers
             {
                 if (string.IsNullOrEmpty(loginDTO.AcademyEmail) || string.IsNullOrEmpty(loginDTO.AcademyPassword))
                 {
-                    return BadRequest("Invalid login credentials.");
+                    return BadRequest("جميع الحقول مطلوبة");
                 }
-                var user = _context.Academies.FirstOrDefault(u => u.AcademyEmail == loginDTO.AcademyEmail);
+                var user = await _context.Academies.Where(u => u.AcademyEmail == loginDTO.AcademyEmail).FirstOrDefaultAsync();
 
-                if (user == null || !BCrypt.Net.BCrypt.Verify(loginDTO.AcademyPassword, user.AcademyPassword))
+                if (user == null || string.IsNullOrEmpty(user.AcademyPassword) 
+                    ||!BCrypt.Net.BCrypt.Verify(loginDTO.AcademyPassword, user.AcademyPassword) )
                 {
-                    return Unauthorized("Invalid username or password.");
+                    return Unauthorized("خطأ في اسم المستخدم او كلمة المرور");
+                }
+                if (user.Statue == false)
+                {
+                    return Unauthorized("لم يتم الموافقة علي تسجيل الأكادمية");
                 }
                 var Token = await token.GenerateToken(user);
                 return Ok(Token);
             }
             catch (Exception ex)
             {
-                return BadRequest($"Error during login: {ex.Message}");
+                return BadRequest($"حدث خطأ اثناء تسجيل الدخول: {ex.Message}");
             }
         }
     }

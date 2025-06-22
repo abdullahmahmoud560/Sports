@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Sports.DTO;
@@ -34,10 +34,22 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        policy =>
+        {
+            policy
+                .AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<EmailService>();
 
 builder.Services.AddDbContext<DB>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
@@ -47,17 +59,21 @@ builder.Services.AddScoped<Token>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+app.UseStaticFiles(); // مهم ييجي بدري علشان يخدم الصور والـ CSS من wwwroot
 
-app.MapControllers();
+app.UseRouting(); // ضروري لتفعيل الـ Endpoints بشكل صحيح
+
+app.UseCors("AllowAll"); // ييجي بعد UseRouting وقبل UseAuthorization
+
+app.UseAuthorization(); // لو فيه Authentication كمان ضيف UseAuthentication قبله
+
+app.UseSwagger();       // ممكن ييجي هنا
+app.UseSwaggerUI();     // مع بعضه
+
+app.MapControllers(); // ييجي في الآخر
 
 app.Run();
+;

@@ -5,6 +5,98 @@
     "version": "1.0"
   },
   "paths": {
+    "/api/Approve/{id}": {
+      "get": {
+        "tags": [
+          "Action"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Reject/{id}": {
+      "get": {
+        "tags": [
+          "Action"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/approve-Player/{id}": {
+      "get": {
+        "tags": [
+          "Action"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/reject-Player/{id}": {
+      "get": {
+        "tags": [
+          "Action"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Login-Academy": {
       "post": {
         "tags": [
@@ -353,19 +445,122 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/RegisterDTO"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RegisterDTO"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/RegisterDTO"
+                "type": "object",
+                "properties": {
+                  "AcademyName": {
+                    "type": "string"
+                  },
+                  "AcademyCountry": {
+                    "type": "string"
+                  },
+                  "AcademyEmail": {
+                    "type": "string"
+                  },
+                  "AcademyPhone": {
+                    "type": "string"
+                  },
+                  "LogoURL": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "AdditionalPhoneNumber": {
+                    "type": "string"
+                  },
+                  "AdditionalEmail": {
+                    "type": "string"
+                  },
+                  "Under12": {
+                    "type": "boolean"
+                  },
+                  "Under14": {
+                    "type": "boolean"
+                  },
+                  "Under16": {
+                    "type": "boolean"
+                  },
+                  "TShirtColor": {
+                    "type": "string"
+                  },
+                  "ShortColor": {
+                    "type": "string"
+                  },
+                  "ShoesColor": {
+                    "type": "string"
+                  },
+                  "AdditionalTShirtColor": {
+                    "type": "string"
+                  },
+                  "AdditionalShortColor": {
+                    "type": "string"
+                  },
+                  "AdditionalShoesColor": {
+                    "type": "string"
+                  },
+                  "Password": {
+                    "type": "string"
+                  },
+                  "ConfirmPassword": {
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "AcademyName": {
+                  "style": "form"
+                },
+                "AcademyCountry": {
+                  "style": "form"
+                },
+                "AcademyEmail": {
+                  "style": "form"
+                },
+                "AcademyPhone": {
+                  "style": "form"
+                },
+                "LogoURL": {
+                  "style": "form"
+                },
+                "AdditionalPhoneNumber": {
+                  "style": "form"
+                },
+                "AdditionalEmail": {
+                  "style": "form"
+                },
+                "Under12": {
+                  "style": "form"
+                },
+                "Under14": {
+                  "style": "form"
+                },
+                "Under16": {
+                  "style": "form"
+                },
+                "TShirtColor": {
+                  "style": "form"
+                },
+                "ShortColor": {
+                  "style": "form"
+                },
+                "ShoesColor": {
+                  "style": "form"
+                },
+                "AdditionalTShirtColor": {
+                  "style": "form"
+                },
+                "AdditionalShortColor": {
+                  "style": "form"
+                },
+                "AdditionalShoesColor": {
+                  "style": "form"
+                },
+                "Password": {
+                  "style": "form"
+                },
+                "ConfirmPassword": {
+                  "style": "form"
+                }
               }
             }
           }
@@ -519,6 +714,106 @@
           }
         }
       }
+    },
+    "/api/Get-Roles": {
+      "get": {
+        "tags": [
+          "Role"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Get-Role/{id}": {
+      "get": {
+        "tags": [
+          "Role"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Delete-Role/{id}": {
+      "delete": {
+        "tags": [
+          "Role"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Update-Role/{id}": {
+      "post": {
+        "tags": [
+          "Role"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoleDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoleDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoleDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -559,7 +854,6 @@
           },
           "time": {
             "type": "string",
-            "format": "time",
             "nullable": true
           },
           "stadium": {
@@ -571,12 +865,12 @@
             "nullable": true
           },
           "homeTeamScore": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "nullable": true
           },
           "awayTeamScore": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -588,11 +882,7 @@
             "type": "string",
             "nullable": true
           },
-          "academyName": {
-            "type": "string",
-            "nullable": true
-          },
-          "category": {
+          "nationality": {
             "type": "string",
             "nullable": true
           },
@@ -605,22 +895,14 @@
             "nullable": true
           },
           "numberShirt": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "nullable": true
           },
-          "goals": {
-            "type": "integer",
-            "format": "int32"
+          "urlImage": {
+            "type": "string",
+            "nullable": true
           },
-          "yellowCards": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "redCards": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nationality": {
+          "urlPassport": {
             "type": "string",
             "nullable": true
           }
@@ -634,6 +916,10 @@
             "type": "string",
             "nullable": true
           },
+          "academyCountry": {
+            "type": "string",
+            "nullable": true
+          },
           "academyEmail": {
             "type": "string",
             "nullable": true
@@ -642,23 +928,60 @@
             "type": "string",
             "nullable": true
           },
-          "academyCity": {
-            "type": "string",
-            "nullable": true
-          },
-          "academyCountry": {
-            "type": "string",
-            "nullable": true
-          },
-          "academyPassword": {
-            "type": "string",
-            "nullable": true
-          },
           "logoURL": {
             "type": "string",
+            "format": "binary",
             "nullable": true
           },
-          "coordinator": {
+          "additionalPhoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "additionalEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "under12": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "under14": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "under16": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "tShirtColor": {
+            "type": "string",
+            "nullable": true
+          },
+          "shortColor": {
+            "type": "string",
+            "nullable": true
+          },
+          "shoesColor": {
+            "type": "string",
+            "nullable": true
+          },
+          "additionalTShirtColor": {
+            "type": "string",
+            "nullable": true
+          },
+          "additionalShortColor": {
+            "type": "string",
+            "nullable": true
+          },
+          "additionalShoesColor": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "confirmPassword": {
             "type": "string",
             "nullable": true
           }

@@ -16,5 +16,6 @@ namespace Sports.Model
         public DbSet<Academy> Academies { get; set; }
         public DbSet<Match> Matches { get; set; }
         public DbSet<Player> Players { get; set; }
+        public DbSet<Camp> camps { get; set; }
     }
 }

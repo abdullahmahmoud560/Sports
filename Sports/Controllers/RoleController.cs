@@ -54,7 +54,7 @@ namespace Sports.Controllers
                 var roles = await _context.Roles.Where(x => x.AcademyId == AcademyId).ToListAsync();
                 if (roles == null || !roles.Any())
                 {
-                    return NotFound("No roles found.");
+                    return Ok(new string[] {});
                 }
                 return Ok(roles);
             }
@@ -107,8 +107,8 @@ namespace Sports.Controllers
         }
 
         [Authorize]
-        [HttpPut("Update-Role/{id}")]
-        public async Task<IActionResult> UpdateRole(int ind , RoleDTO roleDTO) 
+        [HttpPost("Update-Role/{id}")]
+        public async Task<IActionResult> UpdateRole(int id , RoleDTO roleDTO) 
         {
             try
             {
@@ -117,7 +117,7 @@ namespace Sports.Controllers
                     return BadRequest("Invalid Role data.");
                 }
                 var academyId = int.Parse(User.FindFirstValue("Id")!);
-                var role = await _context.Roles.Where(x => x.AcademyId == academyId && x.Id == ind).FirstOrDefaultAsync();
+                var role = await _context.Roles.Where(x => x.AcademyId == academyId && x.Id == id).FirstOrDefaultAsync();
                 if (role == null)
                 {
                     return NotFound("Role not found.");

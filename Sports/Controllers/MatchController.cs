@@ -58,7 +58,7 @@ namespace Sports.Controllers
                 var matches = await _context.Matches.ToListAsync();
                 if (matches == null || !matches.Any())
                 {
-                    return NotFound("No matches found.");
+                    return Ok(new string[] {});
                 }
                 return Ok(matches);
             }
@@ -95,10 +95,6 @@ namespace Sports.Controllers
             try
             {
                 var AcademyId = int.Parse(User.FindFirstValue("Id")!);
-                if (matchDTO == null)
-                {
-                    return BadRequest("Match data is required.");
-                }
                 var match = await _context.Matches.Where(x => x.AcademyId == AcademyId && x.Id == id).FirstOrDefaultAsync();
                 if (match == null)
                 {
@@ -111,8 +107,8 @@ namespace Sports.Controllers
                 match.Time = matchDTO.Time;
                 match.Stadium = matchDTO.Stadium;
                 match.MatchStatus = matchDTO.MatchStatus;
-                match.HomeTeamScore = matchDTO.HomeTeamScore;
-                match.AwayTeamScore = matchDTO.AwayTeamScore;
+                match.HomeTeamScore = matchDTO.HomeTeamScore!;
+                match.AwayTeamScore = matchDTO.AwayTeamScore!;
                 _context.Matches.Update(match);
                 await _context.SaveChangesAsync();
                 return Ok("Match updated successfully.");
@@ -172,7 +168,7 @@ namespace Sports.Controllers
                 var matches = await _context.Matches.Where(x => x.AcademyId == AcademyId).ToListAsync();
                 if (matches == null || !matches.Any())
                 {
-                    return NotFound("No matches found for this academy.");
+                    return Ok(new string[] {});
                 }
                 return Ok(matches);
             }
@@ -196,11 +192,11 @@ namespace Sports.Controllers
 
                     var homeMatches = matches.Where(m => m.AcademyId == academyId);
                     var totalMatches = homeMatches.Count();
-                    var wins = homeMatches.Count(m => m.HomeTeamScore > m.AwayTeamScore);
-                    var losses = homeMatches.Count(m => m.HomeTeamScore < m.AwayTeamScore);
-                    var draws = homeMatches.Count(m => m.HomeTeamScore == m.AwayTeamScore);
-                    var goalsFor = homeMatches.Sum(m => m.HomeTeamScore);
-                    var goalsAgainst = homeMatches.Sum(m => m.AwayTeamScore);
+                    var wins = homeMatches.Count(m => int.Parse(m.HomeTeamScore) > int.Parse(m.AwayTeamScore));
+                    var losses = homeMatches.Count(m => int.Parse(m.HomeTeamScore) < int.Parse(m.AwayTeamScore));
+                    var draws = homeMatches.Count(m => int.Parse(m.HomeTeamScore) == int.Parse(m.AwayTeamScore));
+                    var goalsFor = homeMatches.Sum(m => int.Parse(m.HomeTeamScore));
+                    var goalsAgainst = homeMatches.Sum(m => int.Parse(m.AwayTeamScore));
                     var difference = goalsFor - goalsAgainst;
 
                     return new

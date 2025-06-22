@@ -30,25 +30,39 @@ namespace Sports.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("AcademyCity")
-                        .HasColumnType("longtext");
-
                     b.Property<string>("AcademyCountry")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("AcademyEmail")
+                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("AcademyName")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("AcademyPassword")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("AcademyPhone")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("Coordinator")
+                    b.Property<string>("AdditionalEmail")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("AdditionalPhoneNumber")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("AdditionalShoesColor")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("AdditionalShortColor")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("AdditionalTShirtColor")
                         .HasColumnType("longtext");
 
                     b.Property<string>("LogoURL")
@@ -56,10 +70,35 @@ namespace Sports.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("Role")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("Statue")
+                    b.Property<string>("ShoesColor")
+                        .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<string>("ShortColor")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("Statue")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("TShirtColor")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("academyManagerName")
+                        .HasColumnType("longtext");
+
+                    b.Property<bool?>("under12")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool?>("under14")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool?>("under16")
+                        .HasColumnType("tinyint(1)");
 
                     b.HasKey("Id");
 
@@ -67,6 +106,33 @@ namespace Sports.Migrations
                         .IsUnique();
 
                     b.ToTable("Academies");
+                });
+
+            modelBuilder.Entity("Sports.Model.Camp", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AcademyId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("Date")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Time")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("task")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AcademyId");
+
+                    b.ToTable("camps");
                 });
 
             modelBuilder.Entity("Sports.Model.Match", b =>
@@ -83,8 +149,9 @@ namespace Sports.Migrations
                     b.Property<string>("AwayTeam")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("AwayTeamScore")
-                        .HasColumnType("int");
+                    b.Property<string>("AwayTeamScore")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Category")
                         .HasColumnType("longtext");
@@ -95,8 +162,9 @@ namespace Sports.Migrations
                     b.Property<string>("HomeTeam")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("HomeTeamScore")
-                        .HasColumnType("int");
+                    b.Property<string>("HomeTeamScore")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("MatchStatus")
                         .HasColumnType("longtext");
@@ -104,8 +172,8 @@ namespace Sports.Migrations
                     b.Property<string>("Stadium")
                         .HasColumnType("longtext");
 
-                    b.Property<TimeOnly?>("Time")
-                        .HasColumnType("time(6)");
+                    b.Property<string>("Time")
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -125,35 +193,38 @@ namespace Sports.Migrations
                     b.Property<int>("AcademyId")
                         .HasColumnType("int");
 
-                    b.Property<string>("AcademyName")
-                        .HasColumnType("longtext");
-
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("Category")
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("Goals")
-                        .HasColumnType("int");
-
                     b.Property<string>("Nationality")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("NumberShirt")
-                        .HasColumnType("int");
+                    b.Property<string>("NumberShirt")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("PLayerName")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Possition")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("RedCards")
-                        .HasColumnType("int");
+                    b.Property<bool>("Statu")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("YellowCards")
-                        .HasColumnType("int");
+                    b.Property<string>("URLImage")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("URLPassport")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("category")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.HasKey("id");
 
@@ -184,6 +255,17 @@ namespace Sports.Migrations
                     b.HasIndex("AcademyId");
 
                     b.ToTable("Roles");
+                });
+
+            modelBuilder.Entity("Sports.Model.Camp", b =>
+                {
+                    b.HasOne("Sports.Model.Academy", "Academy")
+                        .WithMany()
+                        .HasForeignKey("AcademyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Academy");
                 });
 
             modelBuilder.Entity("Sports.Model.Match", b =>
