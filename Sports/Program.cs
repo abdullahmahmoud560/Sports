@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Sports.DTO;
@@ -59,11 +58,6 @@ builder.Services.AddScoped<Token>();
 
 var app = builder.Build();
 
-app.UseForwardedHeaders(new ForwardedHeadersOptions
-{
-    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
-});
-
 app.UseStaticFiles();
 
 app.UseRouting();
@@ -80,5 +74,4 @@ app.UseSwaggerUI();
 app.MapControllers();
 
 app.Urls.Add("http://0.0.0.0:5000");
-app.Urls.Add("https://0.0.0.0:5001");
 app.Run();
