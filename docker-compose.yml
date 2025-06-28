@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  sports-api:
+    image: abdullahmahmoud560/sports:latest
+    container_name: sports-api
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "9000:5000" # ربط المنفذ الخارجي (على السيرفر) بالداخلي داخل الحاوية
+    environment:
+      - ASPNETCORE_URLS=http://+:5000 # فقط HTTP
+      - DOTNET_ENVIRONMENT=Production
+    volumes:
+      - ./dataprotection-keys:/root/.aspnet/DataProtection-Keys # لحفظ المفاتيح
+    labels:
+      # إعدادات Coolify / Traefik التلقائية
+      - "coolify.managed=true"
+      - "traefik.enable=true"
+      - "traefik.http.routers.sports-api.rule=Host(`backend.quattrogcc.ae`)"
+      - "traefik.http.routers.sports-api.entrypoints=http,https"
+      - "traefik.http.routers.sports-api.tls.certresolver=le"
+      - "traefik.http.services.sports-api.loadbalancer.server.port=5000"
+
+networks:
+  default:
+    name: coolify_default
