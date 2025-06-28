@@ -1,5 +1,21 @@
 [
   {
+    "ContainingType": "Sports.Controllers.CampController",
+    "Method": "addCamps",
+    "RelativePath": "api/Add-Camps",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "campDTO",
+        "Type": "Sports.DTO.CampDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Sports.Controllers.MatchController",
     "Method": "AddMatch",
     "RelativePath": "api/Add-Match",
@@ -24,9 +40,44 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "playerDTO",
-        "Type": "Sports.DTO.PlayerDTO",
-        "IsRequired": true
+        "Name": "PLayerName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Nationality",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "BirthDate",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "Possition",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "NumberShirt",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "URLImage",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "URLPassport",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "category",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -164,6 +215,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Sports.Controllers.CampController",
+    "Method": "DeleteCamp",
+    "RelativePath": "api/deleteCamp/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Sports.Controllers.RegisterController",
     "Method": "GetAcademies",
     "RelativePath": "api/Get-Academy-By-Id/{id}",
@@ -190,9 +257,29 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Sports.Controllers.CampController",
+    "Method": "GetAllCamps",
+    "RelativePath": "api/Get-All-Camps",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Sports.Controllers.PlayerController",
     "Method": "GetPlayers",
     "RelativePath": "api/Get-All-Players",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Sports.Controllers.RegisterController",
+    "Method": "getCategory",
+    "RelativePath": "api/Get-Categories",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -238,23 +325,7 @@
   {
     "ContainingType": "Sports.Controllers.PlayerController",
     "Method": "GetPlayerById",
-    "RelativePath": "api/Get-Player-By-Id/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Sports.Controllers.PlayerController",
-    "Method": "GetPlayersByAcademy",
-    "RelativePath": "api/Get-Players-By-Academy",
+    "RelativePath": "api/Get-Player-By-Id",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -322,6 +393,11 @@
     "Order": 0,
     "Parameters": [
       {
+        "Name": "academyManagerName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
         "Name": "AcademyName",
         "Type": "System.String",
         "IsRequired": false
@@ -344,61 +420,6 @@
       {
         "Name": "LogoURL",
         "Type": "Microsoft.AspNetCore.Http.IFormFile",
-        "IsRequired": false
-      },
-      {
-        "Name": "AdditionalPhoneNumber",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "AdditionalEmail",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Under12",
-        "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "Under14",
-        "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "Under16",
-        "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "TShirtColor",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "ShortColor",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "ShoesColor",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "AdditionalTShirtColor",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "AdditionalShortColor",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "AdditionalShoesColor",
-        "Type": "System.String",
         "IsRequired": false
       },
       {
@@ -461,7 +482,7 @@
       },
       {
         "Name": "registerDTO",
-        "Type": "Sports.DTO.RegisterDTO",
+        "Type": "Sports.DTO.UpdateAcademyDTO",
         "IsRequired": true
       }
     ],
@@ -502,9 +523,44 @@
         "IsRequired": true
       },
       {
-        "Name": "playerDTO",
-        "Type": "Sports.DTO.PlayerDTO",
-        "IsRequired": true
+        "Name": "PLayerName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Nationality",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "BirthDate",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "Possition",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "NumberShirt",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "URLImage",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "URLPassport",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "category",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -525,6 +581,27 @@
       {
         "Name": "roleDTO",
         "Type": "Sports.DTO.RoleDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Sports.Controllers.CampController",
+    "Method": "UpdateCamp",
+    "RelativePath": "api/updateCamp/{id}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "campDTO",
+        "Type": "Sports.DTO.CampDTO",
         "IsRequired": true
       }
     ],

@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Sports.DTO;
 using Sports.Model;
-using System;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -60,14 +59,14 @@ builder.Services.AddScoped<Token>();
 var app = builder.Build();
 
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseStaticFiles(); // مهم ييجي بدري علشان يخدم الصور والـ CSS من wwwroot
 
 app.UseRouting(); // ضروري لتفعيل الـ Endpoints بشكل صحيح
 
 app.UseCors("AllowAll"); // ييجي بعد UseRouting وقبل UseAuthorization
-
+app.UseAuthentication();  // << أضف هذا السطر هنا
 app.UseAuthorization(); // لو فيه Authentication كمان ضيف UseAuthentication قبله
 
 app.UseSwagger();       // ممكن ييجي هنا

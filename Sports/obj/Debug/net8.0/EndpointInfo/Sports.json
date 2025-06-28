@@ -97,6 +97,114 @@
         }
       }
     },
+    "/api/Add-Camps": {
+      "post": {
+        "tags": [
+          "Camp"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CampDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CampDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CampDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Get-All-Camps": {
+      "get": {
+        "tags": [
+          "Camp"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/updateCamp/{id}": {
+      "post": {
+        "tags": [
+          "Camp"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CampDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CampDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CampDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/deleteCamp/{id}": {
+      "delete": {
+        "tags": [
+          "Camp"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Login-Academy": {
       "post": {
         "tags": [
@@ -302,19 +410,64 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/PlayerDTO"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PlayerDTO"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/PlayerDTO"
+                "type": "object",
+                "properties": {
+                  "PLayerName": {
+                    "type": "string"
+                  },
+                  "Nationality": {
+                    "type": "string"
+                  },
+                  "BirthDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "Possition": {
+                    "type": "string"
+                  },
+                  "NumberShirt": {
+                    "type": "string"
+                  },
+                  "URLImage": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "URLPassport": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "category": {
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "PLayerName": {
+                  "style": "form"
+                },
+                "Nationality": {
+                  "style": "form"
+                },
+                "BirthDate": {
+                  "style": "form"
+                },
+                "Possition": {
+                  "style": "form"
+                },
+                "NumberShirt": {
+                  "style": "form"
+                },
+                "URLImage": {
+                  "style": "form"
+                },
+                "URLPassport": {
+                  "style": "form"
+                },
+                "category": {
+                  "style": "form"
+                }
               }
             }
           }
@@ -338,21 +491,10 @@
         }
       }
     },
-    "/api/Get-Player-By-Id/{id}": {
+    "/api/Get-Player-By-Id": {
       "get": {
         "tags": [
           "Player"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
         ],
         "responses": {
           "200": {
@@ -379,19 +521,64 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/PlayerDTO"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PlayerDTO"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/PlayerDTO"
+                "type": "object",
+                "properties": {
+                  "PLayerName": {
+                    "type": "string"
+                  },
+                  "Nationality": {
+                    "type": "string"
+                  },
+                  "BirthDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "Possition": {
+                    "type": "string"
+                  },
+                  "NumberShirt": {
+                    "type": "string"
+                  },
+                  "URLImage": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "URLPassport": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "category": {
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "PLayerName": {
+                  "style": "form"
+                },
+                "Nationality": {
+                  "style": "form"
+                },
+                "BirthDate": {
+                  "style": "form"
+                },
+                "Possition": {
+                  "style": "form"
+                },
+                "NumberShirt": {
+                  "style": "form"
+                },
+                "URLImage": {
+                  "style": "form"
+                },
+                "URLPassport": {
+                  "style": "form"
+                },
+                "category": {
+                  "style": "form"
+                }
               }
             }
           }
@@ -426,18 +613,6 @@
         }
       }
     },
-    "/api/Get-Players-By-Academy": {
-      "get": {
-        "tags": [
-          "Player"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/api/Register-Academy": {
       "post": {
         "tags": [
@@ -449,6 +624,9 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "academyManagerName": {
+                    "type": "string"
+                  },
                   "AcademyName": {
                     "type": "string"
                   },
@@ -465,39 +643,6 @@
                     "type": "string",
                     "format": "binary"
                   },
-                  "AdditionalPhoneNumber": {
-                    "type": "string"
-                  },
-                  "AdditionalEmail": {
-                    "type": "string"
-                  },
-                  "Under12": {
-                    "type": "boolean"
-                  },
-                  "Under14": {
-                    "type": "boolean"
-                  },
-                  "Under16": {
-                    "type": "boolean"
-                  },
-                  "TShirtColor": {
-                    "type": "string"
-                  },
-                  "ShortColor": {
-                    "type": "string"
-                  },
-                  "ShoesColor": {
-                    "type": "string"
-                  },
-                  "AdditionalTShirtColor": {
-                    "type": "string"
-                  },
-                  "AdditionalShortColor": {
-                    "type": "string"
-                  },
-                  "AdditionalShoesColor": {
-                    "type": "string"
-                  },
                   "Password": {
                     "type": "string"
                   },
@@ -507,6 +652,9 @@
                 }
               },
               "encoding": {
+                "academyManagerName": {
+                  "style": "form"
+                },
                 "AcademyName": {
                   "style": "form"
                 },
@@ -520,39 +668,6 @@
                   "style": "form"
                 },
                 "LogoURL": {
-                  "style": "form"
-                },
-                "AdditionalPhoneNumber": {
-                  "style": "form"
-                },
-                "AdditionalEmail": {
-                  "style": "form"
-                },
-                "Under12": {
-                  "style": "form"
-                },
-                "Under14": {
-                  "style": "form"
-                },
-                "Under16": {
-                  "style": "form"
-                },
-                "TShirtColor": {
-                  "style": "form"
-                },
-                "ShortColor": {
-                  "style": "form"
-                },
-                "ShoesColor": {
-                  "style": "form"
-                },
-                "AdditionalTShirtColor": {
-                  "style": "form"
-                },
-                "AdditionalShortColor": {
-                  "style": "form"
-                },
-                "AdditionalShoesColor": {
                   "style": "form"
                 },
                 "Password": {
@@ -650,17 +765,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RegisterDTO"
+                "$ref": "#/components/schemas/UpdateAcademyDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/RegisterDTO"
+                "$ref": "#/components/schemas/UpdateAcademyDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/RegisterDTO"
+                "$ref": "#/components/schemas/UpdateAcademyDTO"
               }
             }
           }
@@ -673,6 +788,18 @@
       }
     },
     "/api/Count-Academy": {
+      "get": {
+        "tags": [
+          "Register"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Get-Categories": {
       "get": {
         "tags": [
           "Register"
@@ -818,6 +945,25 @@
   },
   "components": {
     "schemas": {
+      "CampDTO": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "task": {
+            "type": "string",
+            "nullable": true
+          },
+          "time": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "LoginDTO": {
         "type": "object",
         "properties": {
@@ -875,69 +1021,40 @@
         },
         "additionalProperties": false
       },
-      "PlayerDTO": {
+      "RoleDTO": {
         "type": "object",
         "properties": {
-          "pLayerName": {
+          "roleName": {
             "type": "string",
             "nullable": true
           },
-          "nationality": {
-            "type": "string",
-            "nullable": true
-          },
-          "birthDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "possition": {
-            "type": "string",
-            "nullable": true
-          },
-          "numberShirt": {
-            "type": "string",
-            "nullable": true
-          },
-          "urlImage": {
-            "type": "string",
-            "nullable": true
-          },
-          "urlPassport": {
+          "roleDescription": {
             "type": "string",
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "RegisterDTO": {
+      "UpdateAcademyDTO": {
         "type": "object",
         "properties": {
-          "academyName": {
-            "type": "string",
-            "nullable": true
-          },
-          "academyCountry": {
-            "type": "string",
-            "nullable": true
-          },
-          "academyEmail": {
-            "type": "string",
-            "nullable": true
-          },
-          "academyPhone": {
-            "type": "string",
-            "nullable": true
-          },
-          "logoURL": {
-            "type": "string",
-            "format": "binary",
-            "nullable": true
-          },
           "additionalPhoneNumber": {
             "type": "string",
             "nullable": true
           },
           "additionalEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "tShirtColor": {
+            "type": "string",
+            "nullable": true
+          },
+          "shortColor": {
+            "type": "string",
+            "nullable": true
+          },
+          "shoesColor": {
             "type": "string",
             "nullable": true
           },
@@ -953,18 +1070,6 @@
             "type": "boolean",
             "nullable": true
           },
-          "tShirtColor": {
-            "type": "string",
-            "nullable": true
-          },
-          "shortColor": {
-            "type": "string",
-            "nullable": true
-          },
-          "shoesColor": {
-            "type": "string",
-            "nullable": true
-          },
           "additionalTShirtColor": {
             "type": "string",
             "nullable": true
@@ -974,28 +1079,6 @@
             "nullable": true
           },
           "additionalShoesColor": {
-            "type": "string",
-            "nullable": true
-          },
-          "password": {
-            "type": "string",
-            "nullable": true
-          },
-          "confirmPassword": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "RoleDTO": {
-        "type": "object",
-        "properties": {
-          "roleName": {
-            "type": "string",
-            "nullable": true
-          },
-          "roleDescription": {
             "type": "string",
             "nullable": true
           }
