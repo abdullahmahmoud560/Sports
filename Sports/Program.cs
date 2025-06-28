@@ -8,7 +8,7 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// إعداد JWT Authentication
+// JWT Auth
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -16,7 +16,7 @@ builder.Services.AddAuthentication(options =>
 })
 .AddJwtBearer(options =>
 {
-    options.RequireHttpsMetadata = false; // مهم لأن Coolify يتعامل مع HTTPS
+    options.RequireHttpsMetadata = true;
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuer = true,
@@ -32,14 +32,12 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-// إعداد CORS
+// CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
     {
-        policy.AllowAnyOrigin()
-              .AllowAnyHeader()
-              .AllowAnyMethod();
+        policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
     });
 });
 
@@ -48,26 +46,26 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<EmailService>();
+builder.Services.AddScoped<Token>();
 
-// إعداد قاعدة البيانات
+// DB
 builder.Services.AddDbContext<DB>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
         new MySqlServerVersion(new Version(8, 0, 36))));
-
-builder.Services.AddScoped<Token>();
 
 var app = builder.Build();
 
 app.UseStaticFiles();
 
-// السماح بتمرير الهيدر X-Forwarded-For و X-Forwarded-Proto من Traefik (Coolify)
+// ✅ السماح بالـ headers من Traefik
 app.UseForwardedHeaders(new ForwardedHeadersOptions
 {
-    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto,
+    RequireHeaderSymmetry = false,
+    ForwardLimit = null
 });
 
 app.UseRouting();
-
 app.UseCors("AllowAll");
 
 app.UseAuthentication();
@@ -78,7 +76,8 @@ app.UseSwaggerUI();
 
 app.MapControllers();
 
-// الاستماع على كل العناوين في بورت 5000
+// ✅ HTTP (لترايفيك) و HTTPS (لو بتجرب محلي)
 app.Urls.Add("http://0.0.0.0:5000");
+app.Urls.Add("https://0.0.0.0:5001");
 
 app.Run();

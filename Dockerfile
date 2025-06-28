@@ -1,4 +1,3 @@
-
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 
 WORKDIR /app
@@ -9,16 +8,18 @@ RUN dotnet restore Sports/Sports.csproj
 
 COPY . ./
 
-RUN dotnet publish Sports/Sports.csproj -c Release -o /out
+RUN dotnet publish Sports/Sports.csproj -c Release -o /out --no-restore
 
+# ==========================
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
+
 WORKDIR /app
 
 ENV ASPNETCORE_URLS=http://+:5000
+ENV DOTNET_ENVIRONMENT=Production
 
 COPY --from=build /out ./
 
 EXPOSE 5000
 
-# تشغيل التطبيق
 CMD ["dotnet", "Sports.dll"]
