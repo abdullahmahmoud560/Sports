@@ -20,13 +20,13 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
 
 # ضبط متغير البيئة لتشغيل التطبيق على المنفذ 80
-ENV ASPNETCORE_URLS=http://+:80
+ENV ASPNETCORE_URLS=http://+:5000
 
 # نسخ الملفات المنشورة من مرحلة `build`
 COPY --from=build /out ./
 
 # فتح المنفذ 80
-EXPOSE 80
+EXPOSE 5000
 
 # تشغيل التطبيق
 CMD ["dotnet", "Sports.dll"] 
