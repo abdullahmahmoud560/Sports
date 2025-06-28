@@ -9,12 +9,12 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "9000:5000" # ربط المنفذ الخارجي (على السيرفر) بالداخلي داخل الحاوية
+      - "9000:5000" # ربط المنفذ الخارجي بالداخلي (9000 = خارجي، 5000 = داخلي)
     environment:
-      - ASPNETCORE_URLS=http://+:5000 # فقط HTTP
+      - ASPNETCORE_URLS=http://+:5000 # فقط HTTP، لا HTTPS
       - DOTNET_ENVIRONMENT=Production
     volumes:
-      - ./dataprotection-keys:/root/.aspnet/DataProtection-Keys # لحفظ المفاتيح
+      - ./dataprotection-keys:/root/.aspnet/DataProtection-Keys # لحفظ مفاتيح التشفير
     labels:
       # إعدادات Coolify / Traefik التلقائية
       - "coolify.managed=true"
