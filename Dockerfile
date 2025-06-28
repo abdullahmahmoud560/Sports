@@ -12,8 +12,13 @@ RUN dotnet publish Sports/Sports.csproj -c Release -o /out
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
 
+# تأكد من الاستماع على HTTP فقط
 ENV ASPNETCORE_URLS=http://+:5000
 ENV DOTNET_ENVIRONMENT=Production
+
+# حذف أي متغيرات بيئية خاصة بـ HTTPS إن وُجدت
+ENV ASPNETCORE_Kestrel__Certificates__Default__Path=""
+ENV ASPNETCORE_Kestrel__Certificates__Default__Password=""
 
 COPY --from=build /out ./
 
