@@ -2,19 +2,19 @@ version: '3.8'
 
 services:
   sports-api:
-    image: abdullahmahmoud560/sports:latest
-    container_name: sports-api
-    restart: unless-stopped
+    # لن نستخدم صورة من DockerHub، سنبدأ البناء من الصفر
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: sports-api
+    restart: unless-stopped
     ports:
-      - "9000:5000" # ربط المنفذ الخارجي بالداخلي (9000 = خارجي، 5000 = داخلي)
+      - "9000:5000" # ربط المنفذ الخارجي بالداخلي
     environment:
-      - ASPNETCORE_URLS=http://+:5000 # فقط HTTP، لا HTTPS
+      - ASPNETCORE_URLS=http://+:5000
       - DOTNET_ENVIRONMENT=Production
     volumes:
-      - ./dataprotection-keys:/root/.aspnet/DataProtection-Keys # لحفظ مفاتيح التشفير
+      - ./dataprotection-keys:/root/.aspnet/DataProtection-Keys
     labels:
       # إعدادات Coolify / Traefik التلقائية
       - "coolify.managed=true"
