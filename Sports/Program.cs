@@ -16,7 +16,7 @@ builder.Services.AddAuthentication(options =>
 })
 .AddJwtBearer(options =>
 {
-    options.RequireHttpsMetadata = true;
+    options.RequireHttpsMetadata = false; // ← مهم: ضعه على false لأن HTTPS خارجي فقط
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuer = true,
@@ -57,7 +57,7 @@ var app = builder.Build();
 
 app.UseStaticFiles();
 
-// ✅ السماح بالـ headers من Traefik
+// ✅ Forwarded Headers من Traefik/Coolify
 app.UseForwardedHeaders(new ForwardedHeadersOptions
 {
     ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto,
@@ -76,8 +76,5 @@ app.UseSwaggerUI();
 
 app.MapControllers();
 
-// ✅ HTTP (لترايفيك) و HTTPS (لو بتجرب محلي)
-app.Urls.Add("http://0.0.0.0:5000");
-app.Urls.Add("https://0.0.0.0:5001");
-
+// فقط استمع على HTTP داخليًا
 app.Run();
