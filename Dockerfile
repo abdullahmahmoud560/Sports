@@ -12,13 +12,16 @@ RUN dotnet publish Sports/Sports.csproj -c Release -o /out
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
 
-# تأكد من الاستماع على HTTP فقط
+# ضع فقط هذه الإعدادات
 ENV ASPNETCORE_URLS=http://+:5000
 ENV DOTNET_ENVIRONMENT=Production
 
-# حذف أي متغيرات بيئية خاصة بـ HTTPS إن وُجدت
+# تأكد من حذف أي إعدادات لشهادة SSL
 ENV ASPNETCORE_Kestrel__Certificates__Default__Path=""
 ENV ASPNETCORE_Kestrel__Certificates__Default__Password=""
+
+# يمكنك أيضًا تعطيل التشفير التلقائي للمفاتيح (في حالة الاستخدام بدون Volume Mount)
+ENV ASPNETCORE_DataProtection__ApplicationDiscriminator="SportsApp"
 
 COPY --from=build /out ./
 
