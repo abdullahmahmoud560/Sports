@@ -74,6 +74,6 @@ app.UseSwagger();       // ممكن ييجي هنا
 app.UseSwaggerUI();     // مع بعضه
 
 app.MapControllers(); // ييجي في الآخر
+app.Urls.Add("http://0.0.0.0:5000");
 
 app.Run();
-;
