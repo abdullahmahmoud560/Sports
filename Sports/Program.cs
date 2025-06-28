@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Sports.DTO;
@@ -58,21 +59,26 @@ builder.Services.AddScoped<Token>();
 
 var app = builder.Build();
 
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+});
 
-//app.UseHttpsRedirection();
+app.UseStaticFiles();
 
-app.UseStaticFiles(); // مهم ييجي بدري علشان يخدم الصور والـ CSS من wwwroot
+app.UseRouting();
 
-app.UseRouting(); // ضروري لتفعيل الـ Endpoints بشكل صحيح
+app.UseCors("AllowAll");
 
-app.UseCors("AllowAll"); // ييجي بعد UseRouting وقبل UseAuthorization
-app.UseAuthentication();  // << أضف هذا السطر هنا
-app.UseAuthorization(); // لو فيه Authentication كمان ضيف UseAuthentication قبله
+app.UseAuthentication();
 
-app.UseSwagger();       // ممكن ييجي هنا
-app.UseSwaggerUI();     // مع بعضه
+app.UseAuthorization();
 
-app.MapControllers(); // ييجي في الآخر
+app.UseSwagger();
+app.UseSwaggerUI();
+
+app.MapControllers();
+
 app.Urls.Add("http://0.0.0.0:5000");
 
 app.Run();
