@@ -17,10 +17,10 @@ namespace Sports.Model
             modelBuilder.Entity<Player>().ToTable("players");
             modelBuilder.Entity<Camp>().ToTable("camps");
         }
-        public DbSet<Role> roles { get; set; }
-        public DbSet<Academy> academies { get; set; }
-        public DbSet<Match> matches { get; set; }
-        public DbSet<Player> players { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<Academy> Academies { get; set; }
+        public DbSet<Match> Matches { get; set; }
+        public DbSet<Player> Players { get; set; }
         public DbSet<Camp> camps { get; set; }
     }
 }

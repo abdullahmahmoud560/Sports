@@ -26,21 +26,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "DB.cs",
-              "DocumentMoniker": "D:\\Sports\\Sports\\Model\\DB.cs",
-              "RelativeDocumentMoniker": "Sports\\Model\\DB.cs",
-              "ToolTip": "D:\\Sports\\Sports\\Model\\DB.cs",
-              "RelativeToolTip": "Sports\\Model\\DB.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAiwBEAAAA5AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-29T19:35:21.828Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
@@ -59,6 +46,19 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DB.cs",
+              "DocumentMoniker": "D:\\Sports\\Sports\\Model\\DB.cs",
+              "RelativeDocumentMoniker": "Sports\\Model\\DB.cs",
+              "ToolTip": "D:\\Sports\\Sports\\Model\\DB.cs",
+              "RelativeToolTip": "Sports\\Model\\DB.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAiwBYAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-29T19:35:21.828Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\Sports\\Sports\\Program.cs",
@@ -67,8 +67,7 @@
               "RelativeToolTip": "Sports\\Program.cs",
               "ViewState": "AgIAAC4AAAAAAAAAAAAkwEoAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-28T04:55:09.069Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-28T04:55:09.069Z"
             },
             {
               "$type": "Document",
@@ -92,8 +91,7 @@
               "RelativeToolTip": "Sports\\Controllers\\RegisterController.cs",
               "ViewState": "AgIAABkAAAAAAAAAAAAQwCAAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-21T07:29:15.769Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-21T07:29:15.769Z"
             }
           ]
         }
