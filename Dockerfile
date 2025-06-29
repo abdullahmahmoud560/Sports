@@ -1,30 +1,31 @@
-# Build Stage
+# مرحلة البناء
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
+# نسخ ملف المشروع
 COPY Sports/Sports.csproj Sports/
+
+# استعادة الحزم
 RUN dotnet restore Sports/Sports.csproj
 
+# نسخ جميع الملفات
 COPY . ./
+
+# بناء ونشر التطبيق
 RUN dotnet publish Sports/Sports.csproj -c Release -o /out
 
-# Runtime Stage
+# مرحلة التشغيل
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
 
-# ضع فقط هذه الإعدادات
+# ضبط متغير البيئة لتشغيل التطبيق على المنفذ 5000
 ENV ASPNETCORE_URLS=http://+:5000
-ENV DOTNET_ENVIRONMENT=Production
 
-# تأكد من حذف أي إعدادات لشهادة SSL
-ENV ASPNETCORE_Kestrel__Certificates__Default__Path=""
-ENV ASPNETCORE_Kestrel__Certificates__Default__Password=""
-
-# يمكنك أيضًا تعطيل التشفير التلقائي للمفاتيح (في حالة الاستخدام بدون Volume Mount)
-ENV ASPNETCORE_DataProtection__ApplicationDiscriminator="SportsApp"
-
+# نسخ الملفات المنشورة من مرحلة `build`
 COPY --from=build /out ./
 
+# فتح المنفذ 5000
 EXPOSE 5000
 
+# تشغيل التطبيق
 CMD ["dotnet", "Sports.dll"]
