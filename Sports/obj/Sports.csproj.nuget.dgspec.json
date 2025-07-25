@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Sports\\Sports\\Sports.csproj": {}
+    "D:\\Projects\\Sports\\Sports\\Sports.csproj": {}
   },
   "projects": {
-    "D:\\Sports\\Sports\\Sports.csproj": {
+    "D:\\Projects\\Sports\\Sports\\Sports.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Sports\\Sports\\Sports.csproj",
+        "projectUniqueName": "D:\\Projects\\Sports\\Sports\\Sports.csproj",
         "projectName": "Sports",
-        "projectPath": "D:\\Sports\\Sports\\Sports.csproj",
+        "projectPath": "D:\\Projects\\Sports\\Sports\\Sports.csproj",
         "packagesPath": "C:\\Users\\Hp\\.nuget\\packages\\",
-        "outputPath": "D:\\Sports\\Sports\\obj\\",
+        "outputPath": "D:\\Projects\\Sports\\Sports\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

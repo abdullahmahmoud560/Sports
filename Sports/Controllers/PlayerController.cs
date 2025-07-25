@@ -34,7 +34,7 @@ namespace Sports.Controllers
                     Directory.CreateDirectory(uploadsFolder);
                 }
 
-                string playerImageFileName = $"{Guid.NewGuid()}_{playerDTO.URLImage.FileName}";
+                string playerImageFileName = $"{Guid.NewGuid()}_{playerDTO.URLImage!.FileName}";
                 string playerImagePath = Path.Combine(uploadsFolder, playerImageFileName);
                 using (var stream = new FileStream(playerImagePath, FileMode.Create))
                 {
@@ -42,7 +42,7 @@ namespace Sports.Controllers
                 }
                 string safeImageUrl = Uri.EscapeUriString($"{Request.Scheme}://{Request.Host}/Players/{playerImageFileName}");
 
-                string passportFileName = $"{Guid.NewGuid()}_{playerDTO.URLPassport.FileName}";
+                string passportFileName = $"{Guid.NewGuid()}_{playerDTO.URLPassport!.FileName}";
                 string passportPath = Path.Combine(uploadsFolder, passportFileName);
                 using (var stream = new FileStream(passportPath, FileMode.Create))
                 {
@@ -52,14 +52,14 @@ namespace Sports.Controllers
 
                 Player player = new Player
                 {
-                    PLayerName = playerDTO.PLayerName,
+                    PLayerName = playerDTO.PLayerName!,
                     BirthDate = playerDTO.BirthDate,
                     Possition = playerDTO.Possition,
-                    NumberShirt = playerDTO.NumberShirt,
+                    NumberShirt = playerDTO.NumberShirt!,
                     URLImage = safeImageUrl,
                     URLPassport = safePassportUrl,
-                    Nationality = playerDTO.Nationality,
-                    category = playerDTO.category,
+                    Nationality = playerDTO.Nationality!,
+                    category = playerDTO.category!,
                     AcademyId = int.Parse(User.FindFirstValue("Id")!)
                 };
 
@@ -117,13 +117,13 @@ namespace Sports.Controllers
         </table>
 
         <div style=""margin-top: 25px; text-align: center;"">
-            <a href=""https://sports.runasp.net/api/approve-Player/{player.id}"" target=""_blank""
+            <a href=""https://backend.quattrogcc.ae/api/approve-Player/{player.id}"" target=""_blank""
                style=""display: inline-block; background-color: #27ae60; color: white; padding: 10px 20px;
                       font-size: 14px; border-radius: 6px; font-weight: normal; text-decoration: none;
                       margin: 5px;"">
                 ✅ قبول الطلب
             </a>
-            <a href=""https://sports.runasp.net/api/reject-Player/{player.id}"" target=""_blank""
+            <a href=""https://backend.quattrogcc.ae/api/reject-Player/{player.id}"" target=""_blank""
                style=""display: inline-block; background-color: #c0392b; color: white; padding: 10px 20px;
                       font-size: 14px; border-radius: 6px; font-weight: normal; text-decoration: none;
                       margin: 5px;"">
@@ -222,11 +222,11 @@ namespace Sports.Controllers
                 if (player == null)
                     return NotFound("اللاعب غير موجود أو غير مفعل");
 
-                player.PLayerName = playerDTO.PLayerName;
+                player.PLayerName = playerDTO.PLayerName!;
                 player.BirthDate = playerDTO.BirthDate;
                 player.Possition = playerDTO.Possition;
-                player.NumberShirt = playerDTO.NumberShirt;
-                player.Nationality = playerDTO.Nationality;
+                player.NumberShirt = playerDTO.NumberShirt!;
+                player.Nationality = playerDTO.Nationality!;
 
                 // تجهيز مجلد الحفظ
                 string uploadsFolder = Path.Combine(_env.WebRootPath, "Players");

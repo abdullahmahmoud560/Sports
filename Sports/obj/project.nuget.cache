@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "IhpacuwdIn0=",
+  "dgSpecHash": "RGYci1dzVO0=",
   "success": true,
-  "projectFilePath": "D:\\Sports\\Sports\\Sports.csproj",
+  "projectFilePath": "D:\\Projects\\Sports\\Sports\\Sports.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Hp\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\Hp\\.nuget\\packages\\bouncycastle.cryptography\\2.5.1\\bouncycastle.cryptography.2.5.1.nupkg.sha512",

@@ -133,7 +133,6 @@ D:\Sports\Sports\obj\Debug\net8.0\scopedcss\bundle\Sports.styles.css
 D:\Sports\Sports\obj\Debug\net8.0\staticwebassets.build.json
 D:\Sports\Sports\obj\Debug\net8.0\staticwebassets.development.json
 D:\Sports\Sports\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-D:\Sports\Sports\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 D:\Sports\Sports\obj\Debug\net8.0\Sports.csproj.Up2Date
 D:\Sports\Sports\obj\Debug\net8.0\Sports.dll
 D:\Sports\Sports\obj\Debug\net8.0\refint\Sports.dll

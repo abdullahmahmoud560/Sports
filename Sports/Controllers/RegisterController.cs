@@ -1,11 +1,9 @@
-﻿using System.Security.AccessControl;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Sports.DTO;
 using Sports.Model;
-using static System.Net.WebRequestMethods;
+using System.Security.Claims;
 using static Sports.DTO.GetAcademyDTO;
 
 namespace Sports.Controllers
@@ -108,13 +106,13 @@ namespace Sports.Controllers
         </table>
 
         <div style=""margin-top: 25px; text-align: center;"">
-            <a href=""https://sports.runasp.net/api/Approve/{academy.Id}"" target=""_blank""
+            <a href=""https://backend.quattrogcc.ae/api/Approve/{academy.Id}"" target=""_blank""
                style=""display: inline-block; background-color: #27ae60; color: white; padding: 10px 20px;
                       font-size: 14px; border-radius: 6px; font-weight: normal; text-decoration: none;
                       margin: 5px;"">
                 ✔️ قبول الطلب
             </a>
-            <a href=""https://sports.runasp.net/api/Reject/{academy.Id}"" target=""_blank""
+            <a href=""https://backend.quattrogcc.ae/api/Reject/{academy.Id}"" target=""_blank""
                style=""display: inline-block; background-color: #c0392b; color: white; padding: 10px 20px;
                       font-size: 14px; border-radius: 6px; font-weight: normal; text-decoration: none;
                       margin: 5px;"">

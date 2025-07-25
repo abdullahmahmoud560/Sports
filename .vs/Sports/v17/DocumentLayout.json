@@ -1,22 +1,18 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Sports\\",
+  "WorkspaceRootPath": "D:\\Projects\\Sports\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{212C495C-A147-4CF6-9199-69F60ED0099E}|Sports\\Sports.csproj|d:\\sports\\sports\\model\\db.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{212C495C-A147-4CF6-9199-69F60ED0099E}|Sports\\Sports.csproj|solutionrelative:sports\\model\\db.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{212C495C-A147-4CF6-9199-69F60ED0099E}|Sports\\Sports.csproj|d:\\sports\\sports\\controllers\\registercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{212C495C-A147-4CF6-9199-69F60ED0099E}|Sports\\Sports.csproj|d:\\projects\\sports\\sports\\controllers\\registercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{212C495C-A147-4CF6-9199-69F60ED0099E}|Sports\\Sports.csproj|solutionrelative:sports\\controllers\\registercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{212C495C-A147-4CF6-9199-69F60ED0099E}|Sports\\Sports.csproj|d:\\sports\\sports\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{212C495C-A147-4CF6-9199-69F60ED0099E}|Sports\\Sports.csproj|solutionrelative:sports\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{212C495C-A147-4CF6-9199-69F60ED0099E}|Sports\\Sports.csproj|d:\\projects\\sports\\sports\\dto\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{212C495C-A147-4CF6-9199-69F60ED0099E}|Sports\\Sports.csproj|solutionrelative:sports\\dto\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{212C495C-A147-4CF6-9199-69F60ED0099E}|Sports\\Sports.csproj|d:\\sports\\sports\\controllers\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{212C495C-A147-4CF6-9199-69F60ED0099E}|Sports\\Sports.csproj|solutionrelative:sports\\controllers\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{212C495C-A147-4CF6-9199-69F60ED0099E}|Sports\\Sports.csproj|d:\\projects\\sports\\sports\\controllers\\actioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{212C495C-A147-4CF6-9199-69F60ED0099E}|Sports\\Sports.csproj|solutionrelative:sports\\controllers\\actioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -47,51 +43,41 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "DB.cs",
-              "DocumentMoniker": "D:\\Sports\\Sports\\Model\\DB.cs",
-              "RelativeDocumentMoniker": "Sports\\Model\\DB.cs",
-              "ToolTip": "D:\\Sports\\Sports\\Model\\DB.cs",
-              "RelativeToolTip": "Sports\\Model\\DB.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAiwBYAAAAeAAAAAAAAAA==",
+              "Title": "RegisterController.cs",
+              "DocumentMoniker": "D:\\Projects\\Sports\\Sports\\Controllers\\RegisterController.cs",
+              "RelativeDocumentMoniker": "Sports\\Controllers\\RegisterController.cs",
+              "ToolTip": "D:\\Projects\\Sports\\Sports\\Controllers\\RegisterController.cs",
+              "RelativeToolTip": "Sports\\Controllers\\RegisterController.cs",
+              "ViewState": "AgIAAFUAAAAAAAAAAAAUwGwAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-29T19:35:21.828Z",
+              "WhenOpened": "2025-07-25T17:13:05.023Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\Sports\\Sports\\Program.cs",
-              "RelativeDocumentMoniker": "Sports\\Program.cs",
-              "ToolTip": "D:\\Sports\\Sports\\Program.cs",
-              "RelativeToolTip": "Sports\\Program.cs",
-              "ViewState": "AgIAAC4AAAAAAAAAAAAkwEoAAAATAAAAAAAAAA==",
+              "Title": "ActionController.cs",
+              "DocumentMoniker": "D:\\Projects\\Sports\\Sports\\Controllers\\ActionController.cs",
+              "RelativeDocumentMoniker": "Sports\\Controllers\\ActionController.cs",
+              "ToolTip": "D:\\Projects\\Sports\\Sports\\Controllers\\ActionController.cs",
+              "RelativeToolTip": "Sports\\Controllers\\ActionController.cs",
+              "ViewState": "AgIAAJsBAAAAAAAAAAAowOsAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-28T04:55:09.069Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "PlayerController.cs",
-              "DocumentMoniker": "D:\\Sports\\Sports\\Controllers\\PlayerController.cs",
-              "RelativeDocumentMoniker": "Sports\\Controllers\\PlayerController.cs",
-              "ToolTip": "D:\\Sports\\Sports\\Controllers\\PlayerController.cs",
-              "RelativeToolTip": "Sports\\Controllers\\PlayerController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-21T07:30:02.275Z"
+              "WhenOpened": "2025-07-25T17:08:23.356Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "RegisterController.cs",
-              "DocumentMoniker": "D:\\Sports\\Sports\\Controllers\\RegisterController.cs",
-              "RelativeDocumentMoniker": "Sports\\Controllers\\RegisterController.cs",
-              "ToolTip": "D:\\Sports\\Sports\\Controllers\\RegisterController.cs",
-              "RelativeToolTip": "Sports\\Controllers\\RegisterController.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAQwCAAAAA2AAAAAAAAAA==",
+              "Title": "EmailService.cs",
+              "DocumentMoniker": "D:\\Projects\\Sports\\Sports\\DTO\\EmailService.cs",
+              "RelativeDocumentMoniker": "Sports\\DTO\\EmailService.cs",
+              "ToolTip": "D:\\Projects\\Sports\\Sports\\DTO\\EmailService.cs",
+              "RelativeToolTip": "Sports\\DTO\\EmailService.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-21T07:29:15.769Z"
+              "WhenOpened": "2025-07-25T17:04:46.48Z",
+              "EditorCaption": ""
             }
           ]
         }
