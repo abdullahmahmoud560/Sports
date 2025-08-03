@@ -373,6 +373,53 @@
         }
       }
     },
+    "/api/Get-Score-Matches-By-Academy": {
+      "get": {
+        "tags": [
+          "Match"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Get-Show-Reports": {
+      "get": {
+        "tags": [
+          "Match"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Get-Details-Reports/{matchId}": {
+      "get": {
+        "tags": [
+          "Match"
+        ],
+        "parameters": [
+          {
+            "name": "matchId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Add-Players": {
       "post": {
         "tags": [
@@ -510,6 +557,10 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "Id": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
                   "PLayerName": {
                     "type": "string"
                   },
@@ -540,6 +591,9 @@
                 }
               },
               "encoding": {
+                "Id": {
+                  "style": "form"
+                },
                 "PLayerName": {
                   "style": "form"
                 },
@@ -1228,6 +1282,10 @@
       "PlayerDTO": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
           "pLayerName": {
             "type": "string",
             "nullable": true

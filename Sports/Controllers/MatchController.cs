@@ -456,5 +456,159 @@ namespace Sports.Controllers
                 return StatusCode(500, $"Error: {ex.Message}");
             }
         }
+
+        [Authorize]
+        [HttpGet("Get-Score-Matches-By-Academy")]
+        public async Task<IActionResult> GetScoreMatchesByAcademy()
+        {
+            try
+            {
+                var academyId = int.Parse(User.FindFirstValue("Id")!);
+
+                // IDs للمباريات اللي ليها تقارير
+                var reportedMatchIds = new HashSet<int>();
+
+                reportedMatchIds.UnionWith(await _context.CardsReports.Select(r => r.MatchId).ToListAsync());
+                reportedMatchIds.UnionWith(await _context.goalsReports.Select(r => r.MatchId).ToListAsync());
+                reportedMatchIds.UnionWith(await _context.playersReports.Select(r => r.MatchId).ToListAsync());
+                reportedMatchIds.UnionWith(await _context.Tech_AdminReports.Select(r => r.MatchId).ToListAsync());
+
+                // الماتشات المنتهية الخاصة بالأكاديمية واللي مافيهاش تقارير
+                var matches = await _context.Matches
+                    .Where(x =>
+                        x.MatchStatus == "Completed" &&
+                        (x.HomeTeamId == academyId || x.AwayTeamId == academyId) &&
+                        !reportedMatchIds.Contains(x.Id))
+                    .ToListAsync();
+
+                var teamIds = matches
+                    .SelectMany(m => new[] { m.HomeTeamId, m.AwayTeamId })
+                    .Distinct()
+                    .ToList();
+
+                var logos = await _context.Academies
+                    .Where(a => teamIds.Contains(a.Id))
+                    .ToDictionaryAsync(a => a.Id, a => a.LogoURL);
+
+                var result = matches.Select(match => new
+                {
+                    Id = match.Id,
+                    Category = match.Category,
+                    HomeTeamName = match.HomeTeamName,
+                    AwayTeamName = match.AwayTeamName,
+                    Date = match.Date,
+                    Time = match.Time,
+                    Stadium = match.Stadium,
+                    MatchStatus = match.MatchStatus,
+                    HomeTeamScore = match.HomeTeamScore,
+                    AwayTeamScore = match.AwayTeamScore,
+                    HomeLogo = logos.TryGetValue(match.HomeTeamId, out var homeLogo) ? homeLogo : null,
+                    AwayLogo = logos.TryGetValue(match.AwayTeamId, out var awayLogo) ? awayLogo : null
+                }).ToList();
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Error retrieving matches: {ex.Message}");
+            }
+        }
+
+        [Authorize]
+        [HttpGet("Get-Show-Reports")]
+        public async Task<IActionResult> GetShowReports()
+        {
+            try
+            {
+                var academyId = int.Parse(User.FindFirstValue("Id")!);
+
+                // IDs للمباريات اللي ليها تقارير
+                var reportedMatchIds = new HashSet<int>();
+
+                reportedMatchIds.UnionWith(await _context.CardsReports.Select(r => r.MatchId).ToListAsync());
+                reportedMatchIds.UnionWith(await _context.goalsReports.Select(r => r.MatchId).ToListAsync());
+                reportedMatchIds.UnionWith(await _context.playersReports.Select(r => r.MatchId).ToListAsync());
+                reportedMatchIds.UnionWith(await _context.Tech_AdminReports.Select(r => r.MatchId).ToListAsync());
+
+                // الماتشات المنتهية الخاصة بالأكاديمية واللي ليها تقارير
+                var matches = await _context.Matches
+                    .Where(x =>
+                        x.MatchStatus == "Completed" &&
+                        (x.HomeTeamId == academyId || x.AwayTeamId == academyId) &&
+                        reportedMatchIds.Contains(x.Id)) // <-- التغيير هنا
+                    .ToListAsync();
+
+                var teamIds = matches
+                    .SelectMany(m => new[] { m.HomeTeamId, m.AwayTeamId })
+                    .Distinct()
+                    .ToList();
+
+                var logos = await _context.Academies
+                    .Where(a => teamIds.Contains(a.Id))
+                    .ToDictionaryAsync(a => a.Id, a => a.LogoURL);
+
+                var result = matches.Select(match => new
+                {
+                    Id = match.Id,
+                    Category = match.Category,
+                    HomeTeamName = match.HomeTeamName,
+                    AwayTeamName = match.AwayTeamName,
+                    Date = match.Date,
+                    Time = match.Time,
+                    Stadium = match.Stadium,
+                    MatchStatus = match.MatchStatus,
+                    HomeTeamScore = match.HomeTeamScore,
+                    AwayTeamScore = match.AwayTeamScore,
+                    HomeLogo = logos.TryGetValue(match.HomeTeamId, out var homeLogo) ? homeLogo : null,
+                    AwayLogo = logos.TryGetValue(match.AwayTeamId, out var awayLogo) ? awayLogo : null
+                }).ToList();
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Error retrieving matches: {ex.Message}");
+            }
+        }
+
+        [Authorize]
+        [HttpGet("Get-Details-Reports/{matchId}")]
+        public async Task<IActionResult> GetDetailsReports(int matchId)
+        {
+            try
+            {
+                var cards = await _context.CardsReports
+                    .Where(r => r.MatchId == matchId)
+                    .ToListAsync();
+
+                var goals = await _context.goalsReports
+                    .Where(r => r.MatchId == matchId)
+                    .ToListAsync();
+
+                var players = await _context.playersReports
+                    .Where(r => r.MatchId == matchId)
+                    .ToListAsync();
+
+                var technical = await _context.Tech_AdminReports
+                    .Where(r => r.MatchId == matchId)
+                    .ToListAsync();
+
+                var result = new
+                {
+                    Cards = cards,
+                    Goals = goals,
+                    Players = players,
+                    Technical = technical
+                };
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Error retrieving match reports: {ex.Message}");
+            }
+        }
+
+
     }
 }

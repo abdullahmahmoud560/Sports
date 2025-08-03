@@ -299,6 +299,22 @@
   },
   {
     "ContainingType": "Sports.Controllers.MatchController",
+    "Method": "GetDetailsReports",
+    "RelativePath": "api/Get-Details-Reports/{matchId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "matchId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Sports.Controllers.MatchController",
     "Method": "GetMatchesByCategory",
     "RelativePath": "api/Get-Match-schedule-results/{category}",
     "HttpMethod": "GET",
@@ -369,6 +385,26 @@
     "ContainingType": "Sports.Controllers.MatchController",
     "Method": "GetScoreMatches",
     "RelativePath": "api/Get-Score-Matches",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Sports.Controllers.MatchController",
+    "Method": "GetScoreMatchesByAcademy",
+    "RelativePath": "api/Get-Score-Matches-By-Academy",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Sports.Controllers.MatchController",
+    "Method": "GetShowReports",
+    "RelativePath": "api/Get-Show-Reports",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -581,6 +617,11 @@
         "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
+      },
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
       },
       {
         "Name": "PLayerName",

@@ -31,7 +31,11 @@ namespace Sports.Controllers
                 var userId = User.FindFirstValue("Id");
                 if (string.IsNullOrEmpty(userId))
                     return Unauthorized("لا يمكن تحديد هوية المستخدم.");
+
                 int academyId = int.Parse(userId);
+
+                if (players == null || players.Count == 0)
+                    return BadRequest("لم يتم استلام أي لاعبين.");
 
                 string uploadsFolder = Path.Combine(_env.WebRootPath, "Players");
                 if (!Directory.Exists(uploadsFolder))
@@ -51,7 +55,7 @@ namespace Sports.Controllers
                         return BadRequest("بعض البيانات الأساسية ناقصة.");
 
                     // حفظ صورة اللاعب
-                    string playerImageFileName = $"{Guid.NewGuid()}_{playerDTO.URLImage.FileName}";
+                    string playerImageFileName = $"{Guid.NewGuid()}.jpg";
                     string playerImagePath = Path.Combine(uploadsFolder, playerImageFileName);
                     using (var stream = new FileStream(playerImagePath, FileMode.Create))
                     {
@@ -59,8 +63,8 @@ namespace Sports.Controllers
                     }
                     string safeImageUrl = $"{Request.Scheme}://{Request.Host}/Players/{playerImageFileName}";
 
-                    // حفظ جواز السفر
-                    string passportFileName = $"{Guid.NewGuid()}_{playerDTO.URLPassport.FileName}";
+                    // حفظ صورة جواز السفر
+                    string passportFileName = $"{Guid.NewGuid()}.jpg";
                     string passportPath = Path.Combine(uploadsFolder, passportFileName);
                     using (var stream = new FileStream(passportPath, FileMode.Create))
                     {
@@ -86,9 +90,15 @@ namespace Sports.Controllers
                     playersToAdd.Add(player);
                 }
 
+                if (playersToAdd.Count == 0)
+                    return BadRequest("لم يتم تجهيز أي لاعب للحفظ.");
+
                 await _context.Players.AddRangeAsync(playersToAdd);
                 var change = await _context.SaveChangesAsync();
-                if (change == 0) return Ok("لم يتم حفظ البيانات");
+
+                if (change == 0)
+                    return Ok("لم يتم حفظ البيانات");
+
                 return Ok("تم تسجيل اللاعبين بنجاح.");
             }
             catch (Exception ex)
@@ -97,6 +107,7 @@ namespace Sports.Controllers
                 return BadRequest($"خطأ أثناء تسجيل اللاعبين: {inner}");
             }
         }
+
 
 
         [Authorize]
@@ -180,9 +191,19 @@ namespace Sports.Controllers
         {
             try
             {
-                var academyId = int.Parse(User.FindFirstValue("Id")!);
-                var players = await _context.Players.Where(x=>x.AcademyId == academyId).ToListAsync();
-                return Ok(players);
+                var Role = User.FindFirstValue("Role");
+                if (Role == "Academy")
+                {
+                    var academyId = int.Parse(User.FindFirstValue("Id")!);
+                    var players = await _context.Players.Where(x => x.AcademyId == academyId && x.Statu == true).ToListAsync();
+                    return Ok(players);
+                }
+                else if (Role == "Admin")
+                {
+                    var players = await _context.Players.Where(x=>x.Location == "Admin" || (x.Location == "Academy" && x.Statu==true)).ToListAsync();
+                    return Ok(players);
+                }
+                return BadRequest("Role not found");
             }
             catch (Exception ex)
             {
@@ -237,7 +258,7 @@ namespace Sports.Controllers
             {
                 var academyId = int.Parse(User.FindFirstValue("Id")!);
                 var player = await _context.Players
-                    .Where(x => x.id == id && x.AcademyId == academyId && x.Statu == true)
+                    .Where(x => x.id == id && x.AcademyId == academyId && x.Statu == false)
                     .FirstOrDefaultAsync();
 
                 if (player == null)
@@ -287,7 +308,7 @@ namespace Sports.Controllers
                 _context.Players.Update(player);
                 await _context.SaveChangesAsync();
 
-                return Ok("تم تعديل بيانات اللاعب بنجاح");
+                return Ok(new { message = "تم تعديل بيانات اللاعب بنجاح" });
             }
             catch (Exception ex)
             {
@@ -436,81 +457,106 @@ namespace Sports.Controllers
         }
 
 
-        [Authorize]
-        [HttpGet("Active-Players")]
-        public async Task<IActionResult> GetActivePlayers()
-        {
-            var academyId = int.Parse(User.FindFirstValue("Id")!); // استخراج الأكاديمية من الـ token
+        //[Authorize]
+        //[HttpGet("Active-Players")]
+        //public async Task<IActionResult> GetActivePlayers()
+        //{
+        //    var Role = User.FindFirstValue("Role");
+        //    if (Role == "Academy") {
+        //    var academyId = int.Parse(User.FindFirstValue("Id")!); // استخراج الأكاديمية من الـ token
 
-            var players = await _context.Players
-                .Where(p => p.AcademyId == academyId && p.Statu == true)
-                .Select(p => new
-                {
-                    id= p.id,
-                    PlayerName = p.PLayerName,
-                    Nationality = p.Nationality,
-                    BirthDate = p.BirthDate.ToString("yyyy-MM-dd"),
-                    Position = p.Possition,
-                    NumberShirt = p.NumberShirt,
-                    URLImage = p.URLImage,
-                    URLPassport = p.URLPassport,
-                    Category = p.category 
-                })
-                .ToListAsync();
+        //    var players = await _context.Players
+        //        .Where(p => p.AcademyId == academyId && p.Statu == true)
+        //        .Select(p => new
+        //        {
+        //            id = p.id,
+        //            PlayerName = p.PLayerName,
+        //            Nationality = p.Nationality,
+        //            BirthDate = p.BirthDate.ToString("yyyy-MM-dd"),
+        //            Position = p.Possition,
+        //            NumberShirt = p.NumberShirt,
+        //            URLImage = p.URLImage,
+        //            URLPassport = p.URLPassport,
+        //            Category = p.category
+        //        })
+        //        .ToListAsync();
 
-            return Ok(players);
-        }
+        //    return Ok(players);
+        //}
+        //    else if(Role == "Admin")
+        //    {
 
-        [Authorize]
-        [HttpGet("Not-Active-Players")]
-        public async Task<IActionResult> GetNotActivePlayers()
-        {
-            var academyId = int.Parse(User.FindFirstValue("Id")!); // استخراج الأكاديمية من الـ token
-            var Role = User.FindFirstValue("Role");
-            if (Role == "Academy")
-            {
-                var players = await _context.Players
-                    .Where(p => p.AcademyId == academyId && p.Statu == false && p.Location == "Academy")
-                    .Select(p => new
-                    {
-                        Id = p.id,
-                        PlayerName = p.PLayerName,
-                        Nationality = p.Nationality,
-                        BirthDate = p.BirthDate.ToString("yyyy-MM-dd"),
-                        Position = p.Possition,
-                        NumberShirt = p.NumberShirt,
-                        URLImage = p.URLImage,
-                        URLPassport = p.URLPassport,
-                        Category = p.category,
-                        Notes = p.Notes
-                    })
-                    .ToListAsync();
+        //        var players = await _context.Players
+        //            .Where(p=>p.Statu == true)
+        //            .Select(p => new
+        //            {
+        //                id = p.id,
+        //                PlayerName = p.PLayerName,
+        //                Nationality = p.Nationality,
+        //                BirthDate = p.BirthDate.ToString("yyyy-MM-dd"),
+        //                Position = p.Possition,
+        //                NumberShirt = p.NumberShirt,
+        //                URLImage = p.URLImage,
+        //                URLPassport = p.URLPassport,
+        //                Category = p.category
+        //            })
+        //            .ToListAsync();
 
-                return Ok(players);
-            }
-            else if (Role == "Admin")
-            {
-                var players = await _context.Players
-                   .Where(p => p.AcademyId == academyId && p.Statu == false && p.Location == "Admin")
-                   .Select(p => new
-                   {
-                       Id = p.id,
-                       PlayerName = p.PLayerName,
-                       Nationality = p.Nationality,
-                       BirthDate = p.BirthDate.ToString("yyyy-MM-dd"),
-                       Position = p.Possition,
-                       NumberShirt = p.NumberShirt,
-                       URLImage = p.URLImage,
-                       URLPassport = p.URLPassport,
-                       Category = p.category,
-                       Notes = p.Notes
-                   })
-                   .ToListAsync();
+        //        return Ok(players);
+        //    }
+        //    return BadRequest("Role not found");
+        //}
 
-                return Ok(players);
-            }
-            return BadRequest("Role not found");
-        }
+        //[Authorize]
+        //[HttpGet("Not-Active-Players")]
+        //public async Task<IActionResult> GetNotActivePlayers()
+        //{
+        //    var academyId = int.Parse(User.FindFirstValue("Id")!); // استخراج الأكاديمية من الـ token
+        //    var Role = User.FindFirstValue("Role");
+        //    if (Role == "Academy")
+        //    {
+        //        var players = await _context.Players
+        //            .Where(p => p.AcademyId == academyId && p.Statu == false && p.Location == "Academy")
+        //            .Select(p => new
+        //            {
+        //                Id = p.id,
+        //                PlayerName = p.PLayerName,
+        //                Nationality = p.Nationality,
+        //                BirthDate = p.BirthDate.ToString("yyyy-MM-dd"),
+        //                Position = p.Possition,
+        //                NumberShirt = p.NumberShirt,
+        //                URLImage = p.URLImage,
+        //                URLPassport = p.URLPassport,
+        //                Category = p.category,
+        //                Notes = p.Notes
+        //            })
+        //            .ToListAsync();
+
+        //        return Ok(players);
+        //    }
+        //    else if (Role == "Admin")
+        //    {
+        //        var players = await _context.Players
+        //           .Where(p => p.AcademyId == academyId && p.Statu == false && p.Location == "Admin")
+        //           .Select(p => new
+        //           {
+        //               Id = p.id,
+        //               PlayerName = p.PLayerName,
+        //               Nationality = p.Nationality,
+        //               BirthDate = p.BirthDate.ToString("yyyy-MM-dd"),
+        //               Position = p.Possition,
+        //               NumberShirt = p.NumberShirt,
+        //               URLImage = p.URLImage,
+        //               URLPassport = p.URLPassport,
+        //               Category = p.category,
+        //               Notes = p.Notes
+        //           })
+        //           .ToListAsync();
+
+        //        return Ok(players);
+        //    }
+        //    return BadRequest("Role not found");
+        //}
 
 
     }
