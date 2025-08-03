@@ -1,5 +1,31 @@
 [
   {
+    "ContainingType": "Sports.Controllers.AdminController",
+    "Method": "AcceptOrRejectPlayers",
+    "RelativePath": "api/AcceptOrReject-Players",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "active",
+        "Type": "Sports.DTO.ActiveDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Sports.Controllers.PlayerController",
+    "Method": "GetActivePlayers",
+    "RelativePath": "api/Active-Players",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Sports.Controllers.CampController",
     "Method": "addCamps",
     "RelativePath": "api/Add-Camps",
@@ -32,6 +58,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Sports.Controllers.MatchController",
+    "Method": "AddReport",
+    "RelativePath": "api/Add-Matches-Report",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "Sports.DTO.MatchReportDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Sports.Controllers.PlayerController",
     "Method": "AddPlayers",
     "RelativePath": "api/Add-Players",
@@ -40,43 +82,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "PLayerName",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Nationality",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "BirthDate",
-        "Type": "System.DateTime",
-        "IsRequired": false
-      },
-      {
-        "Name": "Possition",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "NumberShirt",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "URLImage",
-        "Type": "Microsoft.AspNetCore.Http.IFormFile",
-        "IsRequired": false
-      },
-      {
-        "Name": "URLPassport",
-        "Type": "Microsoft.AspNetCore.Http.IFormFile",
-        "IsRequired": false
-      },
-      {
-        "Name": "category",
-        "Type": "System.String",
+        "Name": "players",
+        "Type": "System.Collections.Generic.List\u00601[[Sports.DTO.PlayerDTO, Sports, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "IsRequired": false
       }
     ],
@@ -99,17 +106,37 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "Sports.Controllers.ActionController",
-    "Method": "ApprovePlayer",
-    "RelativePath": "api/approve-Player/{id}",
-    "HttpMethod": "GET",
+    "ContainingType": "Sports.Controllers.PlayerController",
+    "Method": "AddTechnicalAdministrative",
+    "RelativePath": "api/Add-Technical-administrative",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
+        "Name": "FullName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "AcademyName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "attribute",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "URLImage",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "URLPassport",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -154,22 +181,6 @@
     "ContainingType": "Sports.Controllers.RegisterController",
     "Method": "DeleteAcademy",
     "RelativePath": "api/Delete-Academy/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Sports.Controllers.MatchController",
-    "Method": "DeleteMatch",
-    "RelativePath": "api/Delete-Match/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -269,7 +280,7 @@
   {
     "ContainingType": "Sports.Controllers.PlayerController",
     "Method": "GetPlayers",
-    "RelativePath": "api/Get-All-Players",
+    "RelativePath": "api/Get-All-Players-By-Academy",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -288,15 +299,15 @@
   },
   {
     "ContainingType": "Sports.Controllers.MatchController",
-    "Method": "GetMatch",
-    "RelativePath": "api/Get-Match/{id}",
+    "Method": "GetMatchesByCategory",
+    "RelativePath": "api/Get-Match-schedule-results/{category}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
-        "Type": "System.Int32",
+        "Name": "category",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],
@@ -305,21 +316,17 @@
   {
     "ContainingType": "Sports.Controllers.MatchController",
     "Method": "GetMatches",
-    "RelativePath": "api/Get-Matches",
+    "RelativePath": "api/Get-Matches/{category}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Sports.Controllers.MatchController",
-    "Method": "GetMatchByAcademy",
-    "RelativePath": "api/Get-Matches-By-Academy",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "category",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -359,6 +366,16 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Sports.Controllers.MatchController",
+    "Method": "GetScoreMatches",
+    "RelativePath": "api/Get-Score-Matches",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Sports.Controllers.LoginController",
     "Method": "LoginAcademy",
     "RelativePath": "api/Login-Academy",
@@ -377,11 +394,91 @@
   {
     "ContainingType": "Sports.Controllers.MatchController",
     "Method": "MatchesTable",
-    "RelativePath": "api/Matches-Table",
+    "RelativePath": "api/Matches-Table/{category}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "category",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Sports.Controllers.PlayerController",
+    "Method": "GetNotActivePlayers",
+    "RelativePath": "api/Not-Active-Players",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Sports.Controllers.PlayerController",
+    "Method": "GetPrivateCardsReport",
+    "RelativePath": "api/Private-Cards-Report/{category}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "category",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Sports.Controllers.PlayerController",
+    "Method": "GetPrivateGoalsReport",
+    "RelativePath": "api/Private-Goals-Report/{category}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "category",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Sports.Controllers.PlayerController",
+    "Method": "CardsReportByType",
+    "RelativePath": "api/Public-Cards-Report/{category}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "category",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Sports.Controllers.PlayerController",
+    "Method": "GetTopScorers",
+    "RelativePath": "api/Public-Goals-Report/{category}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "category",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -437,22 +534,6 @@
   },
   {
     "ContainingType": "Sports.Controllers.ActionController",
-    "Method": "RejectPlayer",
-    "RelativePath": "api/reject-Player/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Sports.Controllers.ActionController",
     "Method": "RejectAcademy",
     "RelativePath": "api/Reject/{id}",
     "HttpMethod": "GET",
@@ -483,27 +564,6 @@
       {
         "Name": "registerDTO",
         "Type": "Sports.DTO.UpdateAcademyDTO",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Sports.Controllers.MatchController",
-    "Method": "UpdateMatch",
-    "RelativePath": "api/Update-Match/{id}",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "matchDTO",
-        "Type": "Sports.DTO.MatchDTO",
         "IsRequired": true
       }
     ],

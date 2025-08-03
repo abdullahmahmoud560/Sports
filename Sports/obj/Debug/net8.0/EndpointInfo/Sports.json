@@ -51,45 +51,30 @@
         }
       }
     },
-    "/api/approve-Player/{id}": {
-      "get": {
+    "/api/AcceptOrReject-Players": {
+      "post": {
         "tags": [
-          "Action"
+          "Admin"
         ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ActiveDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ActiveDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ActiveDTO"
+              }
             }
           }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/reject-Player/{id}": {
-      "get": {
-        "tags": [
-          "Action"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -267,31 +252,18 @@
         }
       }
     },
-    "/api/Get-Matches": {
-      "get": {
-        "tags": [
-          "Match"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Get-Match/{id}": {
+    "/api/Get-Matches/{category}": {
       "get": {
         "tags": [
           "Match"
         ],
         "parameters": [
           {
-            "name": "id",
+            "name": "category",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string"
             }
           }
         ],
@@ -302,61 +274,18 @@
         }
       }
     },
-    "/api/Update-Match/{id}": {
-      "post": {
+    "/api/Get-Match-schedule-results/{category}": {
+      "get": {
         "tags": [
           "Match"
         ],
         "parameters": [
           {
-            "name": "id",
+            "name": "category",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/MatchDTO"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/MatchDTO"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/MatchDTO"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Delete-Match/{id}": {
-      "delete": {
-        "tags": [
-          "Match"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string"
             }
           }
         ],
@@ -379,7 +308,29 @@
         }
       }
     },
-    "/api/Get-Matches-By-Academy": {
+    "/api/Matches-Table/{category}": {
+      "get": {
+        "tags": [
+          "Match"
+        ],
+        "parameters": [
+          {
+            "name": "category",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Get-Score-Matches": {
       "get": {
         "tags": [
           "Match"
@@ -391,11 +342,30 @@
         }
       }
     },
-    "/api/Matches-Table": {
-      "get": {
+    "/api/Add-Matches-Report": {
+      "post": {
         "tags": [
           "Match"
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MatchReportDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MatchReportDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MatchReportDto"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -414,58 +384,16 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "PLayerName": {
-                    "type": "string"
-                  },
-                  "Nationality": {
-                    "type": "string"
-                  },
-                  "BirthDate": {
-                    "type": "string",
-                    "format": "date-time"
-                  },
-                  "Possition": {
-                    "type": "string"
-                  },
-                  "NumberShirt": {
-                    "type": "string"
-                  },
-                  "URLImage": {
-                    "type": "string",
-                    "format": "binary"
-                  },
-                  "URLPassport": {
-                    "type": "string",
-                    "format": "binary"
-                  },
-                  "category": {
-                    "type": "string"
+                  "players": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/PlayerDTO"
+                    }
                   }
                 }
               },
               "encoding": {
-                "PLayerName": {
-                  "style": "form"
-                },
-                "Nationality": {
-                  "style": "form"
-                },
-                "BirthDate": {
-                  "style": "form"
-                },
-                "Possition": {
-                  "style": "form"
-                },
-                "NumberShirt": {
-                  "style": "form"
-                },
-                "URLImage": {
-                  "style": "form"
-                },
-                "URLPassport": {
-                  "style": "form"
-                },
-                "category": {
+                "players": {
                   "style": "form"
                 }
               }
@@ -479,7 +407,64 @@
         }
       }
     },
-    "/api/Get-All-Players": {
+    "/api/Add-Technical-administrative": {
+      "post": {
+        "tags": [
+          "Player"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "FullName": {
+                    "type": "string"
+                  },
+                  "AcademyName": {
+                    "type": "string"
+                  },
+                  "attribute": {
+                    "type": "string"
+                  },
+                  "URLImage": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "URLPassport": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "FullName": {
+                  "style": "form"
+                },
+                "AcademyName": {
+                  "style": "form"
+                },
+                "attribute": {
+                  "style": "form"
+                },
+                "URLImage": {
+                  "style": "form"
+                },
+                "URLPassport": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Get-All-Players-By-Academy": {
       "get": {
         "tags": [
           "Player"
@@ -605,6 +590,118 @@
               "format": "int32"
             }
           }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Public-Goals-Report/{category}": {
+      "get": {
+        "tags": [
+          "Player"
+        ],
+        "parameters": [
+          {
+            "name": "category",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Public-Cards-Report/{category}": {
+      "get": {
+        "tags": [
+          "Player"
+        ],
+        "parameters": [
+          {
+            "name": "category",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Private-Cards-Report/{category}": {
+      "get": {
+        "tags": [
+          "Player"
+        ],
+        "parameters": [
+          {
+            "name": "category",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Private-Goals-Report/{category}": {
+      "get": {
+        "tags": [
+          "Player"
+        ],
+        "parameters": [
+          {
+            "name": "category",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Active-Players": {
+      "get": {
+        "tags": [
+          "Player"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Not-Active-Players": {
+      "get": {
+        "tags": [
+          "Player"
         ],
         "responses": {
           "200": {
@@ -945,6 +1042,23 @@
   },
   "components": {
     "schemas": {
+      "ActiveDTO": {
+        "type": "object",
+        "properties": {
+          "playerID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "statu": {
+            "type": "boolean"
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "CampDTO": {
         "type": "object",
         "properties": {
@@ -958,6 +1072,50 @@
             "nullable": true
           },
           "time": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CardReportDto": {
+        "type": "object",
+        "properties": {
+          "playerName": {
+            "type": "string",
+            "nullable": true
+          },
+          "acadamyName": {
+            "type": "string",
+            "nullable": true
+          },
+          "cardType": {
+            "type": "string",
+            "nullable": true
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GoalReportDto": {
+        "type": "object",
+        "properties": {
+          "playerName": {
+            "type": "string",
+            "nullable": true
+          },
+          "acadamyName": {
+            "type": "string",
+            "nullable": true
+          },
+          "minute": {
+            "type": "string",
+            "nullable": true
+          },
+          "notes": {
             "type": "string",
             "nullable": true
           }
@@ -985,13 +1143,21 @@
             "type": "string",
             "nullable": true
           },
-          "homeTeam": {
+          "homeTeamName": {
             "type": "string",
             "nullable": true
           },
-          "awayTeam": {
+          "awayTeamName": {
             "type": "string",
             "nullable": true
+          },
+          "homeTeamId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "awayTeamId": {
+            "type": "integer",
+            "format": "int32"
           },
           "date": {
             "type": "string",
@@ -1021,6 +1187,110 @@
         },
         "additionalProperties": false
       },
+      "MatchReportDto": {
+        "type": "object",
+        "properties": {
+          "matchId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "players": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlayerReportDto"
+            },
+            "nullable": true
+          },
+          "goals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GoalReportDto"
+            },
+            "nullable": true
+          },
+          "cards": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CardReportDto"
+            },
+            "nullable": true
+          },
+          "staff": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StaffReportDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PlayerDTO": {
+        "type": "object",
+        "properties": {
+          "pLayerName": {
+            "type": "string",
+            "nullable": true
+          },
+          "nationality": {
+            "type": "string",
+            "nullable": true
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "possition": {
+            "type": "string",
+            "nullable": true
+          },
+          "numberShirt": {
+            "type": "string",
+            "nullable": true
+          },
+          "urlImage": {
+            "type": "string",
+            "format": "binary",
+            "nullable": true
+          },
+          "urlPassport": {
+            "type": "string",
+            "format": "binary",
+            "nullable": true
+          },
+          "category": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PlayerReportDto": {
+        "type": "object",
+        "properties": {
+          "playerName": {
+            "type": "string",
+            "nullable": true
+          },
+          "position": {
+            "type": "string",
+            "nullable": true
+          },
+          "essential": {
+            "type": "string",
+            "nullable": true
+          },
+          "reserve": {
+            "type": "string",
+            "nullable": true
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "RoleDTO": {
         "type": "object",
         "properties": {
@@ -1029,6 +1299,24 @@
             "nullable": true
           },
           "roleDescription": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StaffReportDto": {
+        "type": "object",
+        "properties": {
+          "techName": {
+            "type": "string",
+            "nullable": true
+          },
+          "role": {
+            "type": "string",
+            "nullable": true
+          },
+          "notes": {
             "type": "string",
             "nullable": true
           }

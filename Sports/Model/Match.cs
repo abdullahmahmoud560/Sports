@@ -1,22 +1,39 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Globalization;
 
 namespace Sports.Model
 {
     public class Match
     {
         public int Id { get; set; }
+
         public string? Category { get; set; }
-        public string? HomeTeam { get; set; }
-        public string? AwayTeam { get; set; }
+
+        public string? HomeTeamName { get; set; }
+        public string? AwayTeamName { get; set; }
+
         public DateTime? Date { get; set; }
         public string? Time { get; set; }
         public string? Stadium { get; set; }
         public string? MatchStatus { get; set; }
-        public Academy? Academy { get; set; }
-        [ForeignKey(nameof(Academy))]
-        public int AcademyId { get; set; }
+
+        // Foreign Keys
+        public int HomeTeamId { get; set; }
+        public int AwayTeamId { get; set; }
+
+        // Navigation Properties (كل واحدة مرتبطة بـ ID مختلف)
+        [ForeignKey(nameof(HomeTeamId))]
+        public Academy? HomeAcademy { get; set; }
+
+        [ForeignKey(nameof(AwayTeamId))]
+        public Academy? AwayAcademy { get; set; }
+
         public string HomeTeamScore { get; set; } = "0";
         public string AwayTeamScore { get; set; } = "0";
+
+        public ICollection<PlayersReport>? PlayersReports { get; set; }
+        public ICollection<GoalsReports>? GoalsReports { get; set; } 
+        public ICollection<StaffReport>? StaffReports { get; set; } 
+        public ICollection<CardsReports>? CardsReports { get; set; } 
+
     }
 }

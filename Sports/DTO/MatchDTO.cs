@@ -1,13 +1,12 @@
-﻿using Sports.Model;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Sports.DTO
+﻿namespace Sports.DTO
 {
     public class MatchDTO
     {
         public string? Category { get; set; }
-        public string? HomeTeam { get; set; }
-        public string? AwayTeam { get; set; }
+        public string? HomeTeamName { get; set; }
+        public string? AwayTeamName { get; set; }
+        public int HomeTeamId { get; set; }
+        public int AwayTeamId { get; set; }
         public DateTime? Date { get; set; }
         public string? Time { get; set; }
         public string? Stadium { get; set; }

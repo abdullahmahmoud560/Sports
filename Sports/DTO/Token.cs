@@ -26,7 +26,7 @@ namespace Sports.DTO
                 var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
                 var information = await _context.Academies.FindAsync(academy.Id);
                 var role = information!.Role;
-
+                
                 var claims = new List<Claim>
                 {
                     new Claim("Id", academy.Id.ToString()),

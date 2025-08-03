@@ -7,6 +7,7 @@ namespace Sports.Model
         public int id { get; set; }
         public string PLayerName { get; set; } = string.Empty;
         public string Nationality { get; set; } = string.Empty;
+        public string? Location { get; set; } = string.Empty;
         public DateTime BirthDate { get; set; }
         public string? Possition { get; set; }
         public string NumberShirt { get; set; } = string.Empty;
@@ -17,5 +18,7 @@ namespace Sports.Model
         public Academy? Academy { get; set; }
         [ForeignKey(nameof(Academy))]
         public int AcademyId { get; set; }
+
+        public string? Notes { get; set; } = string.Empty;
     }
 }

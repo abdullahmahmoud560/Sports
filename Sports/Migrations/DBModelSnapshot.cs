@@ -105,7 +105,7 @@ namespace Sports.Migrations
                     b.HasIndex("AcademyEmail")
                         .IsUnique();
 
-                    b.ToTable("Academies");
+                    b.ToTable("academies", (string)null);
                 });
 
             modelBuilder.Entity("Sports.Model.Camp", b =>
@@ -132,7 +132,73 @@ namespace Sports.Migrations
 
                     b.HasIndex("AcademyId");
 
-                    b.ToTable("camps");
+                    b.ToTable("camps", (string)null);
+                });
+
+            modelBuilder.Entity("Sports.Model.CardsReports", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AcadamyName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("CardType")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("MatchId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("PlayerName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MatchId");
+
+                    b.ToTable("CardsReports");
+                });
+
+            modelBuilder.Entity("Sports.Model.GoalsReports", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AcadamyName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("MatchId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Minute")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("PlayerName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MatchId");
+
+                    b.ToTable("goalsReports");
                 });
 
             modelBuilder.Entity("Sports.Model.Match", b =>
@@ -143,10 +209,10 @@ namespace Sports.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AcademyId")
+                    b.Property<int>("AwayTeamId")
                         .HasColumnType("int");
 
-                    b.Property<string>("AwayTeam")
+                    b.Property<string>("AwayTeamName")
                         .HasColumnType("longtext");
 
                     b.Property<string>("AwayTeamScore")
@@ -159,7 +225,10 @@ namespace Sports.Migrations
                     b.Property<DateTime?>("Date")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("HomeTeam")
+                    b.Property<int>("HomeTeamId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("HomeTeamName")
                         .HasColumnType("longtext");
 
                     b.Property<string>("HomeTeamScore")
@@ -177,9 +246,11 @@ namespace Sports.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AcademyId");
+                    b.HasIndex("AwayTeamId");
 
-                    b.ToTable("Matches");
+                    b.HasIndex("HomeTeamId");
+
+                    b.ToTable("matches", (string)null);
                 });
 
             modelBuilder.Entity("Sports.Model.Player", b =>
@@ -196,8 +267,14 @@ namespace Sports.Migrations
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<string>("Location")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Nationality")
                         .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Notes")
                         .HasColumnType("longtext");
 
                     b.Property<string>("NumberShirt")
@@ -230,7 +307,43 @@ namespace Sports.Migrations
 
                     b.HasIndex("AcademyId");
 
-                    b.ToTable("Players");
+                    b.ToTable("players", (string)null);
+                });
+
+            modelBuilder.Entity("Sports.Model.PlayersReport", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Essential")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("MatchId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("PlayerName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Position")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Reserve")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MatchId");
+
+                    b.ToTable("playersReports");
                 });
 
             modelBuilder.Entity("Sports.Model.Role", b =>
@@ -254,7 +367,74 @@ namespace Sports.Migrations
 
                     b.HasIndex("AcademyId");
 
-                    b.ToTable("Roles");
+                    b.ToTable("roles", (string)null);
+                });
+
+            modelBuilder.Entity("Sports.Model.StaffReport", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("MatchId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("TechName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MatchId");
+
+                    b.ToTable("StaffReport");
+                });
+
+            modelBuilder.Entity("Sports.Model.Tech_admin", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<int>("AcademyId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("AcademyName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("URLImage")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("URLPassport")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("attribute")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("AcademyId");
+
+                    b.ToTable("Tech_admins");
                 });
 
             modelBuilder.Entity("Sports.Model.Camp", b =>
@@ -268,15 +448,45 @@ namespace Sports.Migrations
                     b.Navigation("Academy");
                 });
 
-            modelBuilder.Entity("Sports.Model.Match", b =>
+            modelBuilder.Entity("Sports.Model.CardsReports", b =>
                 {
-                    b.HasOne("Sports.Model.Academy", "Academy")
-                        .WithMany()
-                        .HasForeignKey("AcademyId")
+                    b.HasOne("Sports.Model.Match", "Match")
+                        .WithMany("CardsReports")
+                        .HasForeignKey("MatchId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Academy");
+                    b.Navigation("Match");
+                });
+
+            modelBuilder.Entity("Sports.Model.GoalsReports", b =>
+                {
+                    b.HasOne("Sports.Model.Match", "Match")
+                        .WithMany("GoalsReports")
+                        .HasForeignKey("MatchId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Match");
+                });
+
+            modelBuilder.Entity("Sports.Model.Match", b =>
+                {
+                    b.HasOne("Sports.Model.Academy", "AwayAcademy")
+                        .WithMany()
+                        .HasForeignKey("AwayTeamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Sports.Model.Academy", "HomeAcademy")
+                        .WithMany()
+                        .HasForeignKey("HomeTeamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AwayAcademy");
+
+                    b.Navigation("HomeAcademy");
                 });
 
             modelBuilder.Entity("Sports.Model.Player", b =>
@@ -290,6 +500,17 @@ namespace Sports.Migrations
                     b.Navigation("Academy");
                 });
 
+            modelBuilder.Entity("Sports.Model.PlayersReport", b =>
+                {
+                    b.HasOne("Sports.Model.Match", "Match")
+                        .WithMany("PlayersReports")
+                        .HasForeignKey("MatchId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Match");
+                });
+
             modelBuilder.Entity("Sports.Model.Role", b =>
                 {
                     b.HasOne("Sports.Model.Academy", "Academy")
@@ -299,6 +520,39 @@ namespace Sports.Migrations
                         .IsRequired();
 
                     b.Navigation("Academy");
+                });
+
+            modelBuilder.Entity("Sports.Model.StaffReport", b =>
+                {
+                    b.HasOne("Sports.Model.Match", "Match")
+                        .WithMany("StaffReports")
+                        .HasForeignKey("MatchId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Match");
+                });
+
+            modelBuilder.Entity("Sports.Model.Tech_admin", b =>
+                {
+                    b.HasOne("Sports.Model.Academy", "Academy")
+                        .WithMany()
+                        .HasForeignKey("AcademyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Academy");
+                });
+
+            modelBuilder.Entity("Sports.Model.Match", b =>
+                {
+                    b.Navigation("CardsReports");
+
+                    b.Navigation("GoalsReports");
+
+                    b.Navigation("PlayersReports");
+
+                    b.Navigation("StaffReports");
                 });
 #pragma warning restore 612, 618
         }

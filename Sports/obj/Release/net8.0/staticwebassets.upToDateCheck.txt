@@ -1,8 +1,30 @@
 wwwroot\Logos\0d9822db-d852-4d30-9ecb-ec89a9ec2093_Screenshot 2025-06-14 031039.png
 wwwroot\Logos\32bf45c3-370d-4fcd-b789-1aefb501c20d_Screenshot 2025-06-14 040526.png
+wwwroot\Logos\747f1950-d552-42be-9eeb-da3b128732ec_download (1).png
 wwwroot\Logos\7c160352-de40-451b-a816-a40cf4bd1b2f_Screenshot 2025-06-14 031039.png
 wwwroot\Logos\949d681e-7479-4e2f-bd4c-d4eebd238763_Screenshot 2025-06-14 040526.png
 wwwroot\Logos\9a546acb-85dd-4c38-828e-d8cb71fb73e5_Screenshot 2025-06-14 040526.png
+wwwroot\Logos\a60b3c44-9b0d-4d1e-ac9f-dc3cde28e2e0_download.png
 wwwroot\Logos\ba71e264-888a-4ac8-ad09-5cf61e33ddb6_Screenshot 2025-06-14 031039.png
 wwwroot\Logos\d65e7643-5566-47e6-9392-cb3c6fcbd069_Screenshot 2025-06-14 040526.png
 wwwroot\Logos\e6841008-ce94-43d5-94c8-964cbed538fd_Screenshot 2025-06-14 040526.png
+wwwroot\Passports\74af0a55-d35e-4657-a492-4b735b4a7467_Screenshot 2025-06-29 000325.png
+wwwroot\Passports\ae3f7cd8-10a8-4039-9263-be177d4ea6c0_Screenshot 2025-06-29 000325.png
+wwwroot\Passports\c6577a59-d62c-4d43-bd7c-94425b0219a1_Screenshot 2025-06-29 000325.png
+wwwroot\Players\12cb0a0a-6309-4746-8d5c-fedd05183532_download (1).png
+wwwroot\Players\21062d50-ebf5-4672-925b-00bbbcdaad0a_download.png
+wwwroot\Players\2277843d-2cd3-4b03-833a-79a9971fa44f_download (1).png
+wwwroot\Players\685b6057-27a3-41b7-869c-eec4bda9fff0_download (1).png
+wwwroot\Players\84ca5c0b-f007-4cee-be03-38a765b4eb04_download.png
+wwwroot\Players\923ce245-1056-4447-b655-2d59b356b991_Screenshot 2025-06-28 053009.png
+wwwroot\Players\b94d380d-2eb4-4211-a022-a42c68367ca1_download.png
+wwwroot\Players\c0cfcfcb-02a3-49e2-b1ef-ec48d35a8c2e_Screenshot 2025-06-28 053009.png
+wwwroot\Players\ccec11ad-f5f5-4ba4-bab3-e8c57728892b_download (1).png
+wwwroot\Players\e18b4a4a-b155-4c68-9860-ba1c076785b0_download (1).png
+wwwroot\Technicalandadministrative\104136c5-04a2-4e81-bc7f-923980dbcad9_Screenshot 2025-06-28 053009.png
+wwwroot\Technicalandadministrative\51237037-c904-4b5e-a417-196f5abe18c2_Screenshot 2025-06-28 053009.png
+wwwroot\Technicalandadministrative\acbce054-3064-4b43-af35-ca1e7b2aa2a9_Screenshot 2025-06-28 053009.png
+wwwroot\Players\30f80ec7-785e-4f71-86c5-3063b26fc1c5_download (1).png
+wwwroot\Players\abc46f91-9c32-4189-b377-e753d40e109e_Screenshot 2025-06-28 052000.png
+wwwroot\Players\ce6fb264-ca22-4c3d-8659-3ace9ea8d192_WhatsApp Image 2025-08-03 at 15.02.53_7f8cacaf.jpg
+wwwroot\Players\cf05f49d-6f3a-42d9-b4a6-18c808e0e803_download.png

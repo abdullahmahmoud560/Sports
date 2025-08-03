@@ -2,6 +2,7 @@
 {
     public class PlayerDTO
     {
+        public int Id { get; set; }
         public string? PLayerName { get; set; }
         public string? Nationality { get; set; }
         public DateTime BirthDate { get; set; }
