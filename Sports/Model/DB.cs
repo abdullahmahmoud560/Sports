@@ -16,6 +16,12 @@ namespace Sports.Model
             modelBuilder.Entity<Match>().ToTable("matches");
             modelBuilder.Entity<Player>().ToTable("players");
             modelBuilder.Entity<Camp>().ToTable("camps");
+            modelBuilder.Entity<Team>().ToTable("teams");
+            modelBuilder.Entity<CardsReports>().ToTable("cardsreports");
+            modelBuilder.Entity<GoalsReports>().ToTable("goalsreports");
+            modelBuilder.Entity<PlayersReport>().ToTable("playersreports");
+            modelBuilder.Entity<StaffReport>().ToTable("staffreport");
+            modelBuilder.Entity<Tech_admin>().ToTable("tech_admins");
         }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Academy> Academies { get; set; }
