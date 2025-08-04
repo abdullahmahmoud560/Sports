@@ -11,13 +11,11 @@ namespace Sports.DTO
     {
         private readonly IConfiguration _configuration;
         private readonly DB _context;
-
         public Token(IConfiguration configuration , DB context)
         {
             _configuration = configuration;
             _context = context;
         }
-
         public async Task<string> GenerateToken(Academy academy)
         {
             try

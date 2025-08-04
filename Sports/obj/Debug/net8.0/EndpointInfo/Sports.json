@@ -740,30 +740,6 @@
         }
       }
     },
-    "/api/Active-Players": {
-      "get": {
-        "tags": [
-          "Player"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Not-Active-Players": {
-      "get": {
-        "tags": [
-          "Player"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/api/Register-Academy": {
       "post": {
         "tags": [

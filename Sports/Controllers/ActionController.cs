@@ -283,7 +283,6 @@ namespace Sports.Controllers
 //</body>
 //</html>
 //";
-
 //            var sendEmail = await _emailService.SendEmailAsync(acdemy!.AcademyEmail, "تم قبول تسجيل اللاعب", body);
 //            if (!sendEmail.Equals("تم إرسال البريد الإلكتروني بنجاح"))
 //            {
@@ -407,7 +406,5 @@ namespace Sports.Controllers
 
 //            return Ok("تم رفض الطلب وإرسال إشعار للأكاديمية");
 //        }
-
-
     }
 }

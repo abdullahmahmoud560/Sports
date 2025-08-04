@@ -16,16 +16,6 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "Sports.Controllers.PlayerController",
-    "Method": "GetActivePlayers",
-    "RelativePath": "api/Active-Players",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "Sports.Controllers.CampController",
     "Method": "addCamps",
     "RelativePath": "api/Add-Camps",
@@ -441,16 +431,6 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Sports.Controllers.PlayerController",
-    "Method": "GetNotActivePlayers",
-    "RelativePath": "api/Not-Active-Players",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
     "ReturnTypes": []
   },
   {

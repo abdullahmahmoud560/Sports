@@ -280,7 +280,6 @@ namespace Sports.Controllers
             }
         }
 
-
         [Authorize]
         [HttpGet("Get-Categories")]
         public async Task<IActionResult> getCategory()
