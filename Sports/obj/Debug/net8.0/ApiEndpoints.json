@@ -234,7 +234,7 @@
   {
     "ContainingType": "Sports.Controllers.RegisterController",
     "Method": "GetAcademies",
-    "RelativePath": "api/Get-Academy-By-Id/{id}",
+    "RelativePath": "api/Get-Academy/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -333,16 +333,6 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Sports.Controllers.PlayerController",
-    "Method": "GetPlayerById",
-    "RelativePath": "api/Get-Player-By-Id",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
     "ReturnTypes": []
   },
   {

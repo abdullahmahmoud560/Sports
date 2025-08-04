@@ -22,10 +22,10 @@ namespace Sports.Model
 
         // Navigation Properties (كل واحدة مرتبطة بـ ID مختلف)
         [ForeignKey(nameof(HomeTeamId))]
-        public Academy? HomeAcademy { get; set; }
+        public Team? HomeTeam { get; set; }
 
         [ForeignKey(nameof(AwayTeamId))]
-        public Academy? AwayAcademy { get; set; }
+        public Team? AwayTeam { get; set; }
 
         public string HomeTeamScore { get; set; } = "0";
         public string AwayTeamScore { get; set; } = "0";

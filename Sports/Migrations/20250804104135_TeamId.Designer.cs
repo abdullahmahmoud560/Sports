@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sports.Model;
 
@@ -11,9 +12,11 @@ using Sports.Model;
 namespace Sports.Migrations
 {
     [DbContext(typeof(DB))]
-    partial class DBModelSnapshot : ModelSnapshot
+    [Migration("20250804104135_TeamId")]
+    partial class TeamId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -169,9 +172,6 @@ namespace Sports.Migrations
                     b.Property<string>("Notes")
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("PlayerId")
-                        .HasColumnType("int");
-
                     b.Property<string>("PlayerName")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -179,8 +179,6 @@ namespace Sports.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("MatchId");
-
-                    b.HasIndex("PlayerId");
 
                     b.ToTable("goalsReports");
                 });
@@ -494,32 +492,26 @@ namespace Sports.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Sports.Model.Player", "Player")
-                        .WithMany()
-                        .HasForeignKey("PlayerId");
-
                     b.Navigation("Match");
-
-                    b.Navigation("Player");
                 });
 
             modelBuilder.Entity("Sports.Model.Match", b =>
                 {
-                    b.HasOne("Sports.Model.Team", "AwayTeam")
+                    b.HasOne("Sports.Model.Academy", "AwayAcademy")
                         .WithMany()
                         .HasForeignKey("AwayTeamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Sports.Model.Team", "HomeTeam")
+                    b.HasOne("Sports.Model.Academy", "HomeAcademy")
                         .WithMany()
                         .HasForeignKey("HomeTeamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("AwayTeam");
+                    b.Navigation("AwayAcademy");
 
-                    b.Navigation("HomeTeam");
+                    b.Navigation("HomeAcademy");
                 });
 
             modelBuilder.Entity("Sports.Model.Player", b =>

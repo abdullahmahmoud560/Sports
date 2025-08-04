@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sports.Model;
 
@@ -11,9 +12,11 @@ using Sports.Model;
 namespace Sports.Migrations
 {
     [DbContext(typeof(DB))]
-    partial class DBModelSnapshot : ModelSnapshot
+    [Migration("20250804102341_AddCategoryOfTeam")]
+    partial class AddCategoryOfTeam
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -169,9 +172,6 @@ namespace Sports.Migrations
                     b.Property<string>("Notes")
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("PlayerId")
-                        .HasColumnType("int");
-
                     b.Property<string>("PlayerName")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -179,8 +179,6 @@ namespace Sports.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("MatchId");
-
-                    b.HasIndex("PlayerId");
 
                     b.ToTable("goalsReports");
                 });
@@ -245,6 +243,9 @@ namespace Sports.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("id"));
 
+                    b.Property<int>("AcademyId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime(6)");
 
@@ -272,9 +273,6 @@ namespace Sports.Migrations
                     b.Property<bool>("Statu")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("TeamId")
-                        .HasColumnType("int");
-
                     b.Property<string>("URLImage")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -289,7 +287,7 @@ namespace Sports.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("TeamId");
+                    b.HasIndex("AcademyId");
 
                     b.ToTable("players", (string)null);
                 });
@@ -494,43 +492,37 @@ namespace Sports.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Sports.Model.Player", "Player")
-                        .WithMany()
-                        .HasForeignKey("PlayerId");
-
                     b.Navigation("Match");
-
-                    b.Navigation("Player");
                 });
 
             modelBuilder.Entity("Sports.Model.Match", b =>
                 {
-                    b.HasOne("Sports.Model.Team", "AwayTeam")
+                    b.HasOne("Sports.Model.Academy", "AwayAcademy")
                         .WithMany()
                         .HasForeignKey("AwayTeamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Sports.Model.Team", "HomeTeam")
+                    b.HasOne("Sports.Model.Academy", "HomeAcademy")
                         .WithMany()
                         .HasForeignKey("HomeTeamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("AwayTeam");
+                    b.Navigation("AwayAcademy");
 
-                    b.Navigation("HomeTeam");
+                    b.Navigation("HomeAcademy");
                 });
 
             modelBuilder.Entity("Sports.Model.Player", b =>
                 {
-                    b.HasOne("Sports.Model.Team", "Team")
+                    b.HasOne("Sports.Model.Academy", "Academy")
                         .WithMany()
-                        .HasForeignKey("TeamId")
+                        .HasForeignKey("AcademyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Team");
+                    b.Navigation("Academy");
                 });
 
             modelBuilder.Entity("Sports.Model.PlayersReport", b =>

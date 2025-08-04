@@ -72,6 +72,9 @@ namespace Sports.Controllers
                     }
                     string safePassportUrl = $"{Request.Scheme}://{Request.Host}/Players/{passportFileName}";
 
+                    var team = await _context.teams
+                        .Where(t => t.AcademyId == academyId && t.category == playerDTO.category)
+                        .FirstOrDefaultAsync();
                     // إنشاء كائن اللاعب
                     Player player = new Player
                     {
@@ -83,7 +86,7 @@ namespace Sports.Controllers
                         URLPassport = safePassportUrl,
                         Nationality = playerDTO.Nationality,
                         category = playerDTO.category,
-                        AcademyId = academyId,
+                        TeamId = team!.Id,
                         Location = "Admin"
                     };
 
@@ -195,7 +198,11 @@ namespace Sports.Controllers
                 if (Role == "Academy")
                 {
                     var academyId = int.Parse(User.FindFirstValue("Id")!);
-                    var players = await _context.Players.Where(x => x.AcademyId == academyId && x.Statu == true).ToListAsync();
+                    var team = await _context.teams
+                        .Where(t => t.AcademyId == academyId)
+                        .FirstOrDefaultAsync();
+
+                    var players = await _context.Players.Where(x => x.TeamId == team!.Id && x.Statu == true).ToListAsync();
                     return Ok(players);
                 }
                 else if (Role == "Admin")
@@ -211,44 +218,49 @@ namespace Sports.Controllers
             }
         }
 
-        [Authorize]
-        [HttpGet("Get-Player-By-Id")]
-        public async Task<IActionResult> GetPlayerById()
-        {
-            try
-            {
-                var Id = int.Parse(User.FindFirstValue("Id")!);
-                var playeres = await _context.Players.Where(x => x.AcademyId == Id && x.Statu == true).ToListAsync();
-                List<GetPlayersDTO> playerDTOs = new List<GetPlayersDTO>();
-                if (playeres.Any())
-                {
-                    foreach (var player in playeres)
-                    {
-                        var academy = await _context.Academies.Where(x => x.Id == player.AcademyId).FirstOrDefaultAsync();
-                        playerDTOs.Add(new GetPlayersDTO
-                        {
-                            PLayerName = player.PLayerName,
-                            Possition = player.Possition,
-                            URLPassport = player.URLPassport,
-                            URLImage = player.URLImage,
-                            category = player.category,
-                            AcademyName = academy!.AcademyName,
-                            NumberShirt = player.NumberShirt,
-                            Nationality = player.Nationality,
-                            BirthDate = player.BirthDate.ToString("yyyy-MM-dd"),
-                            PlayerID = player.id
-                        });
-                    }
-                    return Ok(playerDTOs);
-                }
+        //[Authorize]
+        //[HttpGet("Get-Player-By-Id")]
+        //public async Task<IActionResult> GetPlayerById()
+        //{
+        //    try
+        //    {
+        //        var Id = int.Parse(User.FindFirstValue("Id")!);
+        //        var team = await _context.teams
+        //            .Where(t => t.AcademyId == Id
+        //            )
+        //            .FirstOrDefaultAsync();
 
-                return Ok(new string[] { });
-            }
-            catch (Exception)
-            {
-                return BadRequest("حدث خطأ");
-            }
-        }
+        //        var playeres = await _context.Players.Where(x => x.TeamId == team!.Id && x.Statu == true).ToListAsync();
+        //        List<GetPlayersDTO> playerDTOs = new List<GetPlayersDTO>();
+        //        if (playeres.Any())
+        //        {
+        //            foreach (var player in playeres)
+        //            {
+        //                var academy = await _context.Academies.Where(x => x.Id == player.AcademyId).FirstOrDefaultAsync();
+        //                playerDTOs.Add(new GetPlayersDTO
+        //                {
+        //                    PLayerName = player.PLayerName,
+        //                    Possition = player.Possition,
+        //                    URLPassport = player.URLPassport,
+        //                    URLImage = player.URLImage,
+        //                    category = player.category,
+        //                    AcademyName = academy!.AcademyName,
+        //                    NumberShirt = player.NumberShirt,
+        //                    Nationality = player.Nationality,
+        //                    BirthDate = player.BirthDate.ToString("yyyy-MM-dd"),
+        //                    PlayerID = player.id
+        //                });
+        //            }
+        //            return Ok(playerDTOs);
+        //        }
+
+        //        return Ok(new string[] { });
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return BadRequest("حدث خطأ");
+        //    }
+        //}
 
         [Authorize]
         [HttpPost("Update-Player/{id}")]
@@ -256,9 +268,8 @@ namespace Sports.Controllers
         {
             try
             {
-                var academyId = int.Parse(User.FindFirstValue("Id")!);
                 var player = await _context.Players
-                    .Where(x => x.id == id && x.AcademyId == academyId && x.Statu == false)
+                    .Where(x => x.id == id && x.Statu == false)
                     .FirstOrDefaultAsync();
 
                 if (player == null)
@@ -352,7 +363,7 @@ namespace Sports.Controllers
                     group new { goal, player } by new
                     {
                         player.PLayerName,
-                        player.AcademyId,
+                        player.TeamId,
                         player.Possition,
                         player.NumberShirt,
                         goal.AcadamyName
@@ -412,9 +423,16 @@ namespace Sports.Controllers
         {
             var academyId = int.Parse(User.FindFirstValue("Id")!);
 
+            var team = await _context.teams
+                .Where(t => t.AcademyId == academyId && t.category == category)
+                .FirstOrDefaultAsync();
+
+            if (team == null)
+                return NotFound("Team not found");
+
             var report = await (
                 from player in _context.Players
-                where player.AcademyId == academyId && player.Statu == true && player.category == category
+                where player.TeamId == team.Id && player.Statu == true
                 join card in _context.CardsReports
                     on player.PLayerName equals card.PlayerName into playerCards
                 from card in playerCards.DefaultIfEmpty()
@@ -437,24 +455,38 @@ namespace Sports.Controllers
         {
             var academyId = int.Parse(User.FindFirstValue("Id")!);
 
-            var goalsReport = await (
-                from player in _context.Players
-                where player.AcademyId == academyId && player.Statu == true && player.category == category
-                join goal in _context.goalsReports
-                    on player.PLayerName equals goal.PlayerName into playerGoals
-                from goal in playerGoals.DefaultIfEmpty()
-                group goal by new { player.PLayerName, player.Possition, player.NumberShirt } into g
-                select new
-                {
-                    PlayerName = g.Key.PLayerName,
-                    Position = g.Key.Possition,
-                    GoalsCount = g.Count(x => x != null),
-                    NumberShirt = g.Key.NumberShirt
-                }
-            ).ToListAsync();
+            var team = await _context.teams
+                .Where(t => t.AcademyId == academyId && t.category == category)
+                .FirstOrDefaultAsync();
 
-            return Ok(goalsReport);
+            if (team == null)
+                return NotFound("الفريق غير موجود");
+
+            var players = await _context.Players
+                .Where(p => p.TeamId == team.Id && p.Statu == true)
+                .ToListAsync();
+
+            var goals = await _context.goalsReports.ToListAsync();
+
+            var report = players
+                .GroupJoin(
+                    goals,
+                    player => player.PLayerName,
+                    goal => goal.PlayerName,
+                    (player, playerGoals) => new
+                    {
+                        PlayerName = player.PLayerName,
+                        Position = player.Possition,
+                        GoalsCount = playerGoals.Count(),
+                        NumberShirt = player.NumberShirt
+                    }
+                )
+                .OrderByDescending(p => p.GoalsCount)
+                .ToList();
+
+            return Ok(report);
         }
+
 
 
         //[Authorize]

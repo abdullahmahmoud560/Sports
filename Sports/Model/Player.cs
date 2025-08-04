@@ -15,10 +15,9 @@ namespace Sports.Model
         public string URLPassport { get; set; } = string.Empty;
         public bool Statu { get; set; } = false;
         public string category { get; set; } = string.Empty;
-        public Academy? Academy { get; set; }
-        [ForeignKey(nameof(Academy))]
-        public int AcademyId { get; set; }
-
+        public Team? Team { get; set; }
+        [ForeignKey(nameof(Team))]
+        public int TeamId { get; set; }
         public string? Notes { get; set; } = string.Empty;
     }
 }

@@ -163,12 +163,6 @@ namespace Sports.Controllers
                         AdditionalEmail = x.AdditionalEmail,
                         Statue = x.Statue,
                         Role = x.Role,
-                        TShirtColor = x.TShirtColor,
-                        ShortColor = x.ShortColor,
-                        ShoesColor = x.ShoesColor,
-                        AdditionalTShirtColor = x.AdditionalTShirtColor,
-                        AdditionalShortColor = x.AdditionalShortColor,
-                        AdditionalShoesColor = x.AdditionalShoesColor,
                         Under12 = x.under12,
                         Under14 = x.under14,
                         Under16 = x.under16,
@@ -189,7 +183,7 @@ namespace Sports.Controllers
 
 
         [Authorize]
-        [HttpGet("Get-Academy-By-Id/{id}")]
+        [HttpGet("Get-Academy/{id}")]
         public async Task<IActionResult> GetAcademies(int id)
         {
             try
@@ -239,22 +233,113 @@ namespace Sports.Controllers
                 {
                     return NotFound("الأكاديمية غير موجودة");
                 }
+
+                // تحديث بيانات الأكاديمية
                 academy.AdditionalPhoneNumber = registerDTO.AdditionalPhoneNumber;
                 academy.AdditionalEmail = registerDTO.AdditionalEmail;
-                academy.TShirtColor = registerDTO.TShirtColor;
-                academy.ShortColor = registerDTO.ShortColor;
-                academy.ShoesColor = registerDTO.ShoesColor;
-                academy.AdditionalTShirtColor = registerDTO.AdditionalTShirtColor;
-                academy.AdditionalShortColor = registerDTO.AdditionalShortColor;
-                academy.AdditionalShoesColor = registerDTO.AdditionalShoesColor;
                 academy.under12 = registerDTO.under12;
                 academy.under14 = registerDTO.under14;
                 academy.under16 = registerDTO.under16;
 
+                // تحديث أو إنشاء فريق under12
+                if (registerDTO.under12 == true)
+                {
+                    var teamU12 = await _context.teams.FirstOrDefaultAsync(t => t.AcademyId == academy.Id && t.category == "U12");
+                    if (teamU12 != null)
+                    {
+                        // تحديث الفريق
+                        teamU12.TShirtColor = registerDTO.TShirtColor;
+                        teamU12.ShortColor = registerDTO.ShortColor;
+                        teamU12.ShoesColor = registerDTO.ShoesColor;
+                        teamU12.AdditionalTShirtColor = registerDTO.AdditionalTShirtColor;
+                        teamU12.AdditionalShortColor = registerDTO.AdditionalShortColor;
+                        teamU12.AdditionalShoesColor = registerDTO.AdditionalShoesColor;
+                        _context.teams.Update(teamU12);
+                    }
+                    else
+                    {
+                        // إضافة فريق جديد
+                        var newTeam = new Team
+                        {
+                            TShirtColor = registerDTO.TShirtColor,
+                            ShortColor = registerDTO.ShortColor,
+                            ShoesColor = registerDTO.ShoesColor,
+                            AdditionalTShirtColor = registerDTO.AdditionalTShirtColor,
+                            AdditionalShortColor = registerDTO.AdditionalShortColor,
+                            AdditionalShoesColor = registerDTO.AdditionalShoesColor,
+                            AcademyId = academy.Id,
+                            category = "U12"
+                        };
+                        _context.teams.Add(newTeam);
+                    }
+                }
+
+                // نفس الشيء للفئة U14
+                if (registerDTO.under14 == true)
+                {
+                    var teamU14 = await _context.teams.FirstOrDefaultAsync(t => t.AcademyId == academy.Id && t.category == "U14");
+                    if (teamU14 != null)
+                    {
+                        teamU14.TShirtColor = registerDTO.TShirtColor;
+                        teamU14.ShortColor = registerDTO.ShortColor;
+                        teamU14.ShoesColor = registerDTO.ShoesColor;
+                        teamU14.AdditionalTShirtColor = registerDTO.AdditionalTShirtColor;
+                        teamU14.AdditionalShortColor = registerDTO.AdditionalShortColor;
+                        teamU14.AdditionalShoesColor = registerDTO.AdditionalShoesColor;
+                        _context.teams.Update(teamU14);
+                    }
+                    else
+                    {
+                        var newTeam = new Team
+                        {
+                            TShirtColor = registerDTO.TShirtColor,
+                            ShortColor = registerDTO.ShortColor,
+                            ShoesColor = registerDTO.ShoesColor,
+                            AdditionalTShirtColor = registerDTO.AdditionalTShirtColor,
+                            AdditionalShortColor = registerDTO.AdditionalShortColor,
+                            AdditionalShoesColor = registerDTO.AdditionalShoesColor,
+                            AcademyId = academy.Id,
+                            category = "U14"
+                        };
+                        _context.teams.Add(newTeam);
+                    }
+                }
+
+                // نفس الشيء للفئة U16
+                if (registerDTO.under16 == true)
+                {
+                    var teamU16 = await _context.teams.FirstOrDefaultAsync(t => t.AcademyId == academy.Id && t.category == "U16");
+                    if (teamU16 != null)
+                    {
+                        teamU16.TShirtColor = registerDTO.TShirtColor;
+                        teamU16.ShortColor = registerDTO.ShortColor;
+                        teamU16.ShoesColor = registerDTO.ShoesColor;
+                        teamU16.AdditionalTShirtColor = registerDTO.AdditionalTShirtColor;
+                        teamU16.AdditionalShortColor = registerDTO.AdditionalShortColor;
+                        teamU16.AdditionalShoesColor = registerDTO.AdditionalShoesColor;
+                        _context.teams.Update(teamU16);
+                    }
+                    else
+                    {
+                        var newTeam = new Team
+                        {
+                            TShirtColor = registerDTO.TShirtColor,
+                            ShortColor = registerDTO.ShortColor,
+                            ShoesColor = registerDTO.ShoesColor,
+                            AdditionalTShirtColor = registerDTO.AdditionalTShirtColor,
+                            AdditionalShortColor = registerDTO.AdditionalShortColor,
+                            AdditionalShoesColor = registerDTO.AdditionalShoesColor,
+                            AcademyId = academy.Id,
+                            category = "U16"
+                        };
+                        _context.teams.Add(newTeam);
+                    }
+                }
+
                 _context.Academies.Update(academy);
                 await _context.SaveChangesAsync();
 
-                return Ok("تم تحديث بيانات الأكاديمية بنجاح");
+                return Ok("تم تحديث بيانات الأكاديمية والفرق بنجاح");
             }
             catch (Exception ex)
             {

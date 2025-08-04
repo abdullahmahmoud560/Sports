@@ -523,18 +523,6 @@
         }
       }
     },
-    "/api/Get-Player-By-Id": {
-      "get": {
-        "tags": [
-          "Player"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/api/Update-Player/{id}": {
       "post": {
         "tags": [
@@ -826,7 +814,7 @@
         }
       }
     },
-    "/api/Get-Academy-By-Id/{id}": {
+    "/api/Get-Academy/{id}": {
       "get": {
         "tags": [
           "Register"

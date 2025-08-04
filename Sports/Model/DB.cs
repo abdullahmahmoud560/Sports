@@ -28,5 +28,6 @@ namespace Sports.Model
         public DbSet<PlayersReport> playersReports { get; set; }
         public DbSet<GoalsReports> goalsReports { get; set; }
         public DbSet<StaffReport> StaffReport { get; set; }
+        public DbSet<Team> teams { get; set; }
     }
 }

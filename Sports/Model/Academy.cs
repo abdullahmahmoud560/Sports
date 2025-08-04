@@ -23,11 +23,5 @@ namespace Sports.Model
         public bool? under16 { get; set; } = false;
         public bool Statue { get; set; } = false;
         public string Role { get; set; } = "Academy";
-        public string TShirtColor { get; set; } = string.Empty;
-        public string ShortColor { get; set; } = string.Empty;
-        public string ShoesColor { get; set; } = string.Empty;
-        public string? AdditionalTShirtColor { get; set; } = string.Empty;
-        public string? AdditionalShortColor { get; set; } = string.Empty;
-        public string? AdditionalShoesColor { get; set; } = string.Empty;
     }
 }
