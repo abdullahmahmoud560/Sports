@@ -105,7 +105,7 @@ namespace Sports.Controllers
 
                 // هات الماتشات الخاصة بالأكاديمية والكاتيجوري
                 var matches = await _context.Matches
-                    .Where(m => m.Category == category &&
+                    .Where(m => m.Category == category && 
                                 (m.HomeTeamId == academyId || m.AwayTeamId == academyId))
                     .Select(m => new
                     {
@@ -275,11 +275,17 @@ namespace Sports.Controllers
             {
                 List<Academy> academies = new List<Academy>();
                 if (category == "U12")
-                    academies = await _context.Academies.Where(x=>x.under12 == true).ToListAsync();
+                    academies = await _context.Academies
+                        .Where(x => x.under12 == true && x.Role == "Academy")
+                        .ToListAsync();
                 else if (category == "U14")
-                    academies = await _context.Academies.Where(x => x.under14 == true).ToListAsync();
+                    academies = await _context.Academies
+                        .Where(x => x.under14 == true && x.Role == "Academy")
+                        .ToListAsync();
                 else if (category == "U16")
-                    academies = await _context.Academies.Where(x => x.under16 == true).ToListAsync();
+                    academies = await _context.Academies
+                        .Where(x => x.under16 == true && x.Role == "Academy")
+                        .ToListAsync();
 
                 var matches = await _context.Matches
                     .Where(x => x.MatchStatus == "Completed")

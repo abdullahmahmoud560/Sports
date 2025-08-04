@@ -3,8 +3,16 @@
   "WorkspaceRootPath": "D:\\Projects\\Sports\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{212C495C-A147-4CF6-9199-69F60ED0099E}|Sports\\Sports.csproj|d:\\projects\\sports\\sports\\controllers\\matchcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{212C495C-A147-4CF6-9199-69F60ED0099E}|Sports\\Sports.csproj|solutionrelative:sports\\controllers\\matchcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{212C495C-A147-4CF6-9199-69F60ED0099E}|Sports\\Sports.csproj|d:\\projects\\sports\\sports\\controllers\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{212C495C-A147-4CF6-9199-69F60ED0099E}|Sports\\Sports.csproj|solutionrelative:sports\\controllers\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{212C495C-A147-4CF6-9199-69F60ED0099E}|Sports\\Sports.csproj|d:\\projects\\sports\\sports\\dto\\token.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{212C495C-A147-4CF6-9199-69F60ED0099E}|Sports\\Sports.csproj|solutionrelative:sports\\dto\\token.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{212C495C-A147-4CF6-9199-69F60ED0099E}|Sports\\Sports.csproj|d:\\projects\\sports\\sports\\model\\db.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -15,24 +23,12 @@
       "RelativeMoniker": "D:0:0:{212C495C-A147-4CF6-9199-69F60ED0099E}|Sports\\Sports.csproj|solutionrelative:sports\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{212C495C-A147-4CF6-9199-69F60ED0099E}|Sports\\Sports.csproj|d:\\projects\\sports\\sports\\dto\\playerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{212C495C-A147-4CF6-9199-69F60ED0099E}|Sports\\Sports.csproj|solutionrelative:sports\\dto\\playerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{212C495C-A147-4CF6-9199-69F60ED0099E}|Sports\\Sports.csproj|d:\\projects\\sports\\sports\\model\\goalsreports.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{212C495C-A147-4CF6-9199-69F60ED0099E}|Sports\\Sports.csproj|solutionrelative:sports\\model\\goalsreports.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{212C495C-A147-4CF6-9199-69F60ED0099E}|Sports\\Sports.csproj|d:\\projects\\sports\\sports\\controllers\\matchcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{212C495C-A147-4CF6-9199-69F60ED0099E}|Sports\\Sports.csproj|solutionrelative:sports\\controllers\\matchcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{212C495C-A147-4CF6-9199-69F60ED0099E}|Sports\\Sports.csproj|d:\\projects\\sports\\sports\\controllers\\actioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{212C495C-A147-4CF6-9199-69F60ED0099E}|Sports\\Sports.csproj|solutionrelative:sports\\controllers\\actioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{212C495C-A147-4CF6-9199-69F60ED0099E}|Sports\\Sports.csproj|d:\\projects\\sports\\sports\\dto\\token.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{212C495C-A147-4CF6-9199-69F60ED0099E}|Sports\\Sports.csproj|solutionrelative:sports\\dto\\token.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{212C495C-A147-4CF6-9199-69F60ED0099E}|Sports\\Sports.csproj|d:\\projects\\sports\\sports\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -46,7 +42,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 11,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -66,7 +62,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "DB.cs",
               "DocumentMoniker": "D:\\Projects\\Sports\\Sports\\Model\\DB.cs",
               "RelativeDocumentMoniker": "Sports\\Model\\DB.cs",
@@ -74,24 +70,11 @@
               "RelativeToolTip": "Sports\\Model\\DB.cs",
               "ViewState": "AgIAACAAAAAAAAAAAAA0wBcAAABCAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-04T19:14:55.507Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-04T19:14:55.507Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "PlayerDTO.cs",
-              "DocumentMoniker": "D:\\Projects\\Sports\\Sports\\DTO\\PlayerDTO.cs",
-              "RelativeDocumentMoniker": "Sports\\DTO\\PlayerDTO.cs",
-              "ToolTip": "D:\\Projects\\Sports\\Sports\\DTO\\PlayerDTO.cs",
-              "RelativeToolTip": "Sports\\DTO\\PlayerDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-04T12:09:30.003Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "GoalsReports.cs",
               "DocumentMoniker": "D:\\Projects\\Sports\\Sports\\Model\\GoalsReports.cs",
               "RelativeDocumentMoniker": "Sports\\Model\\GoalsReports.cs",
@@ -103,19 +86,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
               "Title": "MatchController.cs",
               "DocumentMoniker": "D:\\Projects\\Sports\\Sports\\Controllers\\MatchController.cs",
               "RelativeDocumentMoniker": "Sports\\Controllers\\MatchController.cs",
               "ToolTip": "D:\\Projects\\Sports\\Sports\\Controllers\\MatchController.cs",
               "RelativeToolTip": "Sports\\Controllers\\MatchController.cs",
-              "ViewState": "AgIAADIAAAAAAAAAAAAwwCkAAAA0AAAAAAAAAA==",
+              "ViewState": "AgIAAAEBAAAAAAAAAAAiwA8BAABGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-03T13:20:56.903Z"
+              "WhenOpened": "2025-08-03T13:20:56.903Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "appsettings.json",
               "DocumentMoniker": "D:\\Projects\\Sports\\Sports\\appsettings.json",
               "RelativeDocumentMoniker": "Sports\\appsettings.json",
@@ -127,15 +111,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 2,
               "Title": "Token.cs",
               "DocumentMoniker": "D:\\Projects\\Sports\\Sports\\DTO\\Token.cs",
               "RelativeDocumentMoniker": "Sports\\DTO\\Token.cs",
               "ToolTip": "D:\\Projects\\Sports\\Sports\\DTO\\Token.cs",
               "RelativeToolTip": "Sports\\DTO\\Token.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAzwBEAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAB8AAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-03T15:10:25.901Z"
+              "WhenOpened": "2025-08-03T15:10:25.901Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -151,20 +136,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "PlayerController.cs",
               "DocumentMoniker": "D:\\Projects\\Sports\\Sports\\Controllers\\PlayerController.cs",
               "RelativeDocumentMoniker": "Sports\\Controllers\\PlayerController.cs",
               "ToolTip": "D:\\Projects\\Sports\\Sports\\Controllers\\PlayerController.cs",
               "RelativeToolTip": "Sports\\Controllers\\PlayerController.cs",
-              "ViewState": "AgIAAF4BAAAAAAAAAAAUwKUBAABPAAAAAAAAAA==",
+              "ViewState": "AgIAAIQCAAAAAAAAAAAqwBoAAABNAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-03T12:28:43.21Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 7,
               "Title": "AdminController.cs",
               "DocumentMoniker": "D:\\Projects\\Sports\\Sports\\Controllers\\AdminController.cs",
               "RelativeDocumentMoniker": "Sports\\Controllers\\AdminController.cs",
