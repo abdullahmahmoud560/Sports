@@ -421,70 +421,129 @@ namespace Sports.Controllers
         [HttpGet("Private-Cards-Report/{category}")]
         public async Task<IActionResult> GetPrivateCardsReport(string category)
         {
-            var academyId = int.Parse(User.FindFirstValue("Id")!);
+            var Role = User.FindFirstValue("Role");
+            if (Role == "Academy")
+            {
+                var academyId = int.Parse(User.FindFirstValue("Id")!);
 
-            var team = await _context.teams
-                .Where(t => t.AcademyId == academyId && t.category == category)
-                .FirstOrDefaultAsync();
+                var team = await _context.teams
+                    .Where(t => t.AcademyId == academyId && t.category == category)
+                    .FirstOrDefaultAsync();
 
-            if (team == null)
-                return Ok("الفريق غير موجود");
+                if (team == null)
+                    return Ok("الفريق غير موجود");
 
-            var report = await (
-                from player in _context.Players
-                where player.TeamId == team.Id && player.Statu == true
-                join card in _context.CardsReports
-                    on player.PLayerName equals card.PlayerName into playerCards
-                from card in playerCards.DefaultIfEmpty()
-                group card by new { player.PLayerName } into g
-                select new
-                {
-                    PlayerName = g.Key.PLayerName,
-                    YellowCards = g.Count(x => x != null && x.CardType.ToLower() == "yellow"),
-                    RedCards = g.Count(x => x != null && x.CardType.ToLower() == "red"),
-                    TotalCards = g.Count(x => x != null)
-                }
-            ).ToListAsync();
+                var report = await (
+                    from player in _context.Players
+                    where player.TeamId == team.Id && player.Statu == true
+                    join card in _context.CardsReports
+                        on player.PLayerName equals card.PlayerName into playerCards
+                    from card in playerCards.DefaultIfEmpty()
+                    group card by new { player.PLayerName } into g
+                    select new
+                    {
+                        PlayerName = g.Key.PLayerName,
+                        YellowCards = g.Count(x => x != null && x.CardType.ToLower() == "yellow"),
+                        RedCards = g.Count(x => x != null && x.CardType.ToLower() == "red"),
+                        TotalCards = g.Count(x => x != null)
+                    }
+                ).ToListAsync();
 
-            return Ok(report);
+                return Ok(report);
+            }
+            else if (Role == "Admin") 
+            {
+                var cardsReport = await (
+                    from card in _context.CardsReports
+                    join player in _context.Players
+                        on card.PlayerName equals player.PLayerName
+                    where player.Statu == true && player.category == category
+                    group card by new { card.PlayerName, card.AcadamyName } into groupData
+                    select new
+                    {
+                        PlayerName = groupData.Key.PlayerName,
+                        AcademyName = groupData.Key.AcadamyName,
+                        YellowCards = groupData.Count(c => c.CardType.ToLower() == "yellow"),
+                        RedCards = groupData.Count(c => c.CardType.ToLower() == "red"),
+                        TotalCards = groupData.Count()
+                    }
+                )
+                .OrderByDescending(x => x.TotalCards)
+                .ToListAsync();
+                return Ok(cardsReport);
+            }
+            return Ok("الصلاحية غير موجودة");
         }
 
         [Authorize]
         [HttpGet("Private-Goals-Report/{category}")]
         public async Task<IActionResult> GetPrivateGoalsReport(string category)
         {
-            var academyId = int.Parse(User.FindFirstValue("Id")!);
+            var Role = User.FindFirstValue("Role");
+            if (Role == "Academy")
+            {
+                var academyId = int.Parse(User.FindFirstValue("Id")!);
 
-            var team = await _context.teams
-                .Where(t => t.AcademyId == academyId && t.category == category)
-                .FirstOrDefaultAsync();
+                var team = await _context.teams
+                    .Where(t => t.AcademyId == academyId && t.category == category)
+                    .FirstOrDefaultAsync();
 
-            if (team == null)
-                return Ok("الفريق غير موجود");
+                if (team == null)
+                    return Ok("الفريق غير موجود");
 
-            var players = await _context.Players
-                .Where(p => p.TeamId == team.Id && p.Statu == true)
-                .ToListAsync();
+                var players = await _context.Players
+                    .Where(p => p.TeamId == team.Id && p.Statu == true)
+                    .ToListAsync();
 
-            var goals = await _context.goalsReports.ToListAsync();
+                var goals = await _context.goalsReports.ToListAsync();
 
-            var report = players
-                .GroupJoin(
-                    goals,
-                    player => player.PLayerName,
-                    goal => goal.PlayerName,
-                    (player, playerGoals) => new
+                var report = players
+                    .GroupJoin(
+                        goals,
+                        player => player.PLayerName,
+                        goal => goal.PlayerName,
+                        (player, playerGoals) => new
+                        {
+                            PlayerName = player.PLayerName,
+                            Position = player.Possition,
+                            GoalsCount = playerGoals.Count(),
+                            NumberShirt = player.NumberShirt
+                        }
+                    )
+                    .OrderByDescending(p => p.GoalsCount)
+                    .ToList();
+
+                return Ok(report);
+            }
+            else if(Role == "Admin")
+            {
+                var topScorers = await (
+                    from goal in _context.goalsReports
+                    join player in _context.Players
+                        on goal.PlayerName equals player.PLayerName
+                    where player.Statu == true && player.category == category
+                    group new { goal, player } by new
                     {
-                        PlayerName = player.PLayerName,
-                        Position = player.Possition,
-                        GoalsCount = playerGoals.Count(),
-                        NumberShirt = player.NumberShirt
+                        player.PLayerName,
+                        player.TeamId,
+                        player.Possition,
+                        player.NumberShirt,
+                        goal.AcadamyName
+                    } into g
+                    select new
+                    {
+                        PlayerName = g.Key.PLayerName,
+                        AcademyName = g.Key.AcadamyName,
+                        Position = g.Key.Possition,
+                        NumberShirt = g.Key.NumberShirt,
+                        GoalsCount = g.Count()
                     }
                 )
-                .OrderByDescending(p => p.GoalsCount)
-                .ToList();
-
-            return Ok(report);
+                .OrderByDescending(x => x.GoalsCount)
+                .ToListAsync();
+                return Ok(topScorers);
+            }
+            return Ok("الصلاحية غير موجودة");
         }
 
 
