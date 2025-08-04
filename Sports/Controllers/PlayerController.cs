@@ -428,7 +428,7 @@ namespace Sports.Controllers
                 .FirstOrDefaultAsync();
 
             if (team == null)
-                return NotFound("Team not found");
+                return Ok("الفريق غير موجود");
 
             var report = await (
                 from player in _context.Players
@@ -460,7 +460,7 @@ namespace Sports.Controllers
                 .FirstOrDefaultAsync();
 
             if (team == null)
-                return NotFound("الفريق غير موجود");
+                return Ok("الفريق غير موجود");
 
             var players = await _context.Players
                 .Where(p => p.TeamId == team.Id && p.Statu == true)
