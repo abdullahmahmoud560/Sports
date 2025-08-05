@@ -94,7 +94,7 @@ namespace Sports.Controllers
         <p>يمكنكم الآن تسجيل الدخول إلى المنصة وإدارة الأكاديمية واللاعبين بكل سهولة.</p>
 
         <div style=""text-align: center;"">
-            <a href=""https://khalej-kotro.vercel.app/login"" target=""_blank"" class=""button"">
+            <a href=""https://academy.quattrogcc.ae/Login"" target=""_blank"" class=""button"">
                 تسجيل الدخول
             </a>
         </div>
@@ -222,7 +222,7 @@ namespace Sports.Controllers
 
     <div class=""footer"">
       <p>الدعم: <a href=""mailto:support@quattrogcc.ae"">support@quattrogcc.ae</a></p>
-      <p><a href=""https://khalej-kotro.vercel.app"" target=""_blank"">خليجية كواترو</a></p>
+      <p><a href=""https://academy.quattrogcc.ae/Login"" target=""_blank"">خليجية كواترو</a></p>
     </div>
   </div>
 </body>
