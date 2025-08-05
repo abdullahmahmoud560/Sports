@@ -20,15 +20,34 @@ namespace Sports.Controllers
 
         [Authorize]
         [HttpPost("Add-Match")]
-        public async Task<IActionResult> AddMatch([FromBody]MatchDTO matchDTO)
+        public async Task<IActionResult> AddMatch([FromBody] MatchDTO matchDTO)
         {
             try
             {
                 if (matchDTO == null)
-                {
-                    return BadRequest("Match data is required.");
-                }
+                    return BadRequest("يجب إرسال بيانات المباراة.");
 
+                // التحقق من وجود الأكاديمية المستضيفة
+                var home = await _context.Academies.FirstOrDefaultAsync(x => x.AcademyName == matchDTO.HomeTeamName);
+                if (home == null)
+                    return BadRequest($"الأكاديمية المستضيفة '{matchDTO.HomeTeamName}' غير موجودة.");
+
+                // جلب الفريق المرتبط بالأكاديمية المستضيفة
+                var homeTeam = await _context.teams.FirstOrDefaultAsync(x => x.AcademyId == home.Id);
+                if (homeTeam == null)
+                    return BadRequest($"لا يوجد فريق مرتبط بالأكاديمية '{matchDTO.HomeTeamName}'.");
+
+                // التحقق من وجود الأكاديمية الضيفة
+                var away = await _context.Academies.FirstOrDefaultAsync(x => x.AcademyName == matchDTO.AwayTeamName);
+                if (away == null)
+                    return BadRequest($"الأكاديمية الضيفة '{matchDTO.AwayTeamName}' غير موجودة.");
+
+                // جلب الفريق المرتبط بالأكاديمية الضيفة
+                var awayTeam = await _context.teams.FirstOrDefaultAsync(x => x.AcademyId == away.Id);
+                if (awayTeam == null)
+                    return BadRequest($"لا يوجد فريق مرتبط بالأكاديمية '{matchDTO.AwayTeamName}'.");
+
+                // إنشاء المباراة
                 Match match = new Match
                 {
                     Category = matchDTO.Category,
@@ -37,19 +56,24 @@ namespace Sports.Controllers
                     Date = matchDTO.Date,
                     Time = matchDTO.Time,
                     Stadium = matchDTO.Stadium,
-                    MatchStatus = matchDTO.MatchStatus,
-                    HomeTeamId = matchDTO.HomeTeamId,
-                    AwayTeamId = matchDTO.AwayTeamId,
+                    MatchStatus = "قادمة",
+                    HomeTeamId = homeTeam.Id,
+                    AwayTeamId = awayTeam.Id,
                 };
+
                 await _context.Matches.AddAsync(match);
                 await _context.SaveChangesAsync();
-                return Ok("Match added successfully.");
+
+                return Ok("تمت إضافة المباراة بنجاح.");
             }
             catch (Exception ex)
             {
-                return BadRequest($"Error adding match: {ex.Message}");
+                var error = ex.InnerException?.Message ?? ex.Message;
+                return BadRequest($"حدث خطأ أثناء حفظ المباراة: {error}");
             }
         }
+
+
 
         //جدول المباريات
         [HttpGet("Get-Matches/{category}")]
@@ -176,36 +200,34 @@ namespace Sports.Controllers
         //    }
         //}
 
-        //[Authorize]
-        //[HttpPost("Update-Match/{id}")]
-        //public async Task<IActionResult> UpdateMatch(int id, MatchDTO matchDTO)
-        //{
-        //    try
-        //    {
-        //        var AcademyId = int.Parse(User.FindFirstValue("Id")!);
-        //        var match = await _context.Matches.Where(x => x.AcademyId == AcademyId && x.Id == id).FirstOrDefaultAsync();
-        //        if (match == null)
-        //        {
-        //            return NotFound($"Match with ID {id} not found.");
-        //        }
-        //        match.Category = matchDTO.Category;
-        //        match.HomeTeam = matchDTO.HomeTeam;
-        //        match.AwayTeam = matchDTO.AwayTeam;
-        //        match.Date = matchDTO.Date;
-        //        match.Time = matchDTO.Time;
-        //        match.Stadium = matchDTO.Stadium;
-        //        match.MatchStatus = matchDTO.MatchStatus;
-        //        match.HomeTeamScore = matchDTO.HomeTeamScore!;
-        //        match.AwayTeamScore = matchDTO.AwayTeamScore!;
-        //        _context.Matches.Update(match);
-        //        await _context.SaveChangesAsync();
-        //        return Ok("Match updated successfully.");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest($"Error updating match: {ex.Message}");
-        //    }
-        //}
+        [Authorize]
+        [HttpPost("Update-Match/{id}")]
+        public async Task<IActionResult> UpdateMatch(int id, MatchDTO matchDTO)
+        {
+            try
+            {
+                var AcademyId = int.Parse(User.FindFirstValue("Id")!);
+                var match = await _context.Matches.Where(x=>x.Id == id).FirstOrDefaultAsync();
+                if (match == null)
+                {
+                    return NotFound("المباراة غير موجودة");
+                }
+                match.Category = matchDTO.Category;
+                match.Date = matchDTO.Date;
+                match.Time = matchDTO.Time;
+                match.Stadium = matchDTO.Stadium;
+                match.MatchStatus = matchDTO.MatchStatus;
+                match.HomeTeamScore = matchDTO.HomeTeamScore!;
+                match.AwayTeamScore = matchDTO.AwayTeamScore!;
+                _context.Matches.Update(match);
+                await _context.SaveChangesAsync();
+                return Ok("تم التعديل بنجاح");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Error updating match: {ex.Message}");
+            }
+        }
 
         //[Authorize]
         //[HttpDelete("Delete-Match/{id}")]
@@ -246,25 +268,21 @@ namespace Sports.Controllers
             }
         }
 
-        //[Authorize]
-        //[HttpGet("Get-Matches-By-Academy")]
-        //public async Task<IActionResult> GetMatchByAcademy()
-        //{
-        //    try
-        //    {
-        //        var AcademyId = int.Parse(User.FindFirstValue("Id")!);
-        //        var matches = await _context.Matches.Where(x => x.AcademyId == AcademyId).ToListAsync();
-        //        if (matches == null || !matches.Any())
-        //        {
-        //            return Ok(new string[] {});
-        //        }
-        //        return Ok(matches);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest($"Error retrieving matches: {ex.Message}");
-        //    }
-        //}
+        [Authorize]
+        [HttpGet("Get-Matches-By-Academy")]
+        public async Task<IActionResult> GetMatchByAcademy()
+        {
+            try
+            {
+                var AcademyId = int.Parse(User.FindFirstValue("Id")!);
+                var matches = await _context.Matches.ToListAsync();
+                return Ok(matches);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Error retrieving matches: {ex.Message}");
+            }
+        }
 
 
         //جدول ترتيب الفرق
