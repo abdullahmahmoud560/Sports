@@ -119,6 +119,7 @@ namespace Sports.Controllers
         {
             try
             {
+                var AcademyName = User.FindFirstValue("AcademyName");
                 // التحقق إن الصورة موجودة
                 if (technicalAdministrativeDTO.URLImage == null || technicalAdministrativeDTO.URLImage.Length == 0)
                 {
@@ -170,7 +171,7 @@ namespace Sports.Controllers
                     AcademyId = academyId,
                     URLImage = safeImageUrl,
                     URLPassport = safePassportUrl,
-                    AcademyName = technicalAdministrativeDTO.AcademyName!,
+                    AcademyName = AcademyName!,
                     attribute = technicalAdministrativeDTO.attribute,
                 };
 

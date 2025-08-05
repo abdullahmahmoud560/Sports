@@ -67,75 +67,75 @@ namespace Sports.Controllers
 
                 await _context.Academies.AddAsync(academy);
                 await _context.SaveChangesAsync();
-//                var body = $@"
-//<!DOCTYPE html>
-//<html lang=""ar"">
-//<head>
-//    <meta charset=""UTF-8"">
-//    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
-//    <title>طلب تسجيل أكاديمية جديدة</title>
-//</head>
-//<body style=""font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f6f8; color: #333; margin: 0; padding: 20px; direction: rtl;"">
-//    <div style=""max-width: 700px; margin: auto; background-color: #ffffff; border-radius: 10px; padding: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);"">
-//        <h2 style=""font-size: 18px; color: #2c3e50; margin-bottom: 10px;"">طلب تسجيل أكاديمية جديدة</h2>
-//        <p style=""font-size: 14px; margin: 10px 0;"">تم تقديم طلب لتسجيل أكاديمية جديدة، يرجى مراجعة البيانات التالية:</p>
+                var body = $@"
+<!DOCTYPE html>
+<html lang=""ar"">
+<head>
+    <meta charset=""UTF-8"">
+    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+    <title>طلب تسجيل أكاديمية جديدة</title>
+</head>
+<body style=""font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f6f8; color: #333; margin: 0; padding: 20px; direction: rtl;"">
+    <div style=""max-width: 700px; margin: auto; background-color: #ffffff; border-radius: 10px; padding: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);"">
+        <h2 style=""font-size: 18px; color: #2c3e50; margin-bottom: 10px;"">طلب تسجيل أكاديمية جديدة</h2>
+        <p style=""font-size: 14px; margin: 10px 0;"">تم تقديم طلب لتسجيل أكاديمية جديدة، يرجى مراجعة البيانات التالية:</p>
 
-//        <table style=""width: 100%; border-collapse: collapse; margin-top: 20px;"">
-//            <tr>
-//                <td style=""padding: 10px; border: 1px solid #ddd; font-size: 14px;"">اسم الأكاديمية</td>
-//                <td style=""padding: 10px; border: 1px solid #ddd; font-size: 14px;"">{registerDTO.AcademyName}</td>
-//            </tr>
-//            <tr>
-//                <td style=""padding: 10px; border: 1px solid #ddd; font-size: 14px;"">البريد الإلكتروني</td>
-//                <td style=""padding: 10px; border: 1px solid #ddd; font-size: 14px;"">{registerDTO.AcademyEmail}</td>
-//            </tr>
-//            <tr>
-//                <td style=""padding: 10px; border: 1px solid #ddd; font-size: 14px;"">رقم الهاتف</td>
-//                <td style=""padding: 10px; border: 1px solid #ddd; font-size: 14px;"">{registerDTO.AcademyPhone}</td>
-//            </tr>
-//            <tr>
-//                <td style=""padding: 10px; border: 1px solid #ddd; font-size: 14px;"">الدولة</td>
-//                <td style=""padding: 10px; border: 1px solid #ddd; font-size: 14px;"">{registerDTO.AcademyCountry}</td>
-//            </tr>
-//            <tr>
-//                <td style=""padding: 10px; border: 1px solid #ddd; font-size: 14px;"">شعار الأكاديمية</td>
-//                <td style=""padding: 10px; border: 1px solid #ddd;"">
-//                    <img src=""{safeUrl}"" alt=""شعار الأكاديمية"" style=""max-width: 150px; height: auto; border-radius: 6px;"">
-//                </td>
-//            </tr>
-//        </table>
+        <table style=""width: 100%; border-collapse: collapse; margin-top: 20px;"">
+            <tr>
+                <td style=""padding: 10px; border: 1px solid #ddd; font-size: 14px;"">اسم الأكاديمية</td>
+                <td style=""padding: 10px; border: 1px solid #ddd; font-size: 14px;"">{registerDTO.AcademyName}</td>
+            </tr>
+            <tr>
+                <td style=""padding: 10px; border: 1px solid #ddd; font-size: 14px;"">البريد الإلكتروني</td>
+                <td style=""padding: 10px; border: 1px solid #ddd; font-size: 14px;"">{registerDTO.AcademyEmail}</td>
+            </tr>
+            <tr>
+                <td style=""padding: 10px; border: 1px solid #ddd; font-size: 14px;"">رقم الهاتف</td>
+                <td style=""padding: 10px; border: 1px solid #ddd; font-size: 14px;"">{registerDTO.AcademyPhone}</td>
+            </tr>
+            <tr>
+                <td style=""padding: 10px; border: 1px solid #ddd; font-size: 14px;"">الدولة</td>
+                <td style=""padding: 10px; border: 1px solid #ddd; font-size: 14px;"">{registerDTO.AcademyCountry}</td>
+            </tr>
+            <tr>
+                <td style=""padding: 10px; border: 1px solid #ddd; font-size: 14px;"">شعار الأكاديمية</td>
+                <td style=""padding: 10px; border: 1px solid #ddd;"">
+                    <img src=""{safeUrl}"" alt=""شعار الأكاديمية"" style=""max-width: 150px; height: auto; border-radius: 6px;"">
+                </td>
+            </tr>
+        </table>
 
-//        <div style=""margin-top: 25px; text-align: center;"">
-//            <a href=""https://backend.quattrogcc.ae/api/Approve/{academy.Id}"" target=""_blank""
-//               style=""display: inline-block; background-color: #27ae60; color: white; padding: 10px 20px;
-//                      font-size: 14px; border-radius: 6px; font-weight: normal; text-decoration: none;
-//                      margin: 5px;"">
-//                ✔️ قبول الطلب
-//            </a>
-//            <a href=""https://backend.quattrogcc.ae/api/Reject/{academy.Id}"" target=""_blank""
-//               style=""display: inline-block; background-color: #c0392b; color: white; padding: 10px 20px;
-//                      font-size: 14px; border-radius: 6px; font-weight: normal; text-decoration: none;
-//                      margin: 5px;"">
-//                ❌ رفض الطلب
-//            </a>
-//        </div>
+        <div style=""margin-top: 25px; text-align: center;"">
+            <a href=""https://backend.quattrogcc.ae/api/Approve/{academy.Id}"" target=""_blank""
+               style=""display: inline-block; background-color: #27ae60; color: white; padding: 10px 20px;
+                      font-size: 14px; border-radius: 6px; font-weight: normal; text-decoration: none;
+                      margin: 5px;"">
+                ✔️ قبول الطلب
+            </a>
+            <a href=""https://backend.quattrogcc.ae/api/Reject/{academy.Id}"" target=""_blank""
+               style=""display: inline-block; background-color: #c0392b; color: white; padding: 10px 20px;
+                      font-size: 14px; border-radius: 6px; font-weight: normal; text-decoration: none;
+                      margin: 5px;"">
+                ❌ رفض الطلب
+            </a>
+        </div>
 
-//        <div style=""font-size: 13px; color: #777; margin-top: 30px; text-align: center;"">
-//            <p>مع تحيات فريق <strong>خليجية كواترو</strong></p>
-//            <p>
-//                <a href=""https://khalej-kotro.vercel.app"" target=""_blank"" style=""color: #3498db;"">خليجية كواترو</a><br/>
-//                الدعم: <a href=""mailto:support@quattrogcc.ae"" style=""color: #3498db;"">support@quattrogcc.ae</a>
-//            </p>
-//        </div>
-//    </div>
-//</body>
-//</html>";
+        <div style=""font-size: 13px; color: #777; margin-top: 30px; text-align: center;"">
+            <p>مع تحيات فريق <strong>خليجية كواترو</strong></p>
+            <p>
+                <a href=""https://khalej-kotro.vercel.app"" target=""_blank"" style=""color: #3498db;"">خليجية كواترو</a><br/>
+                الدعم: <a href=""mailto:support@quattrogcc.ae"" style=""color: #3498db;"">support@quattrogcc.ae</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>";
 
-//                var sendEmail = await _emailService.SendEmailAsync("info@quattrogcc.ae", "طلب تسجيل أكادمية جديدة", body);
-//                if (!sendEmail.Equals("تم إرسال البريد الإلكتروني بنجاح"))
-//                {
-//                    return BadRequest("حدث خطأ أثناء إرسال البريد الإلكتروني");
-//                }
+                var sendEmail = await _emailService.SendEmailAsync("info@quattrogcc.ae", "طلب تسجيل أكادمية جديدة", body);
+                if (!sendEmail.Equals("تم إرسال البريد الإلكتروني بنجاح"))
+                {
+                    return BadRequest("حدث خطأ أثناء إرسال البريد الإلكتروني");
+                }
                 return Ok("تم تقديم الطلب بنجاح ! سيتم مراجعة بياناتك والموافقة على طلب تسجيل الفريق في البطولة");
             }
             catch (Exception ex)
@@ -150,7 +150,7 @@ namespace Sports.Controllers
         {
             try
             {
-                var academies = await _context.Academies
+                var academies = await _context.Academies.Where(x=>x.Role == "Academy")
                     .Select(x => new AcademyDTO
                     {
                         Id = x.Id,
